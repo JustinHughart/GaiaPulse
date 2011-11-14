@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{114BAB52-FDF4-4C3C-9944-92B2D63A3F17}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GaiaPulse</RootNamespace>
+    <AssemblyName>GaiaPulse</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Avatar, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Storage, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Video, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Xact, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnimationManager\AnimationMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationManager\AnimationMain.Designer.cs">
+      <DependentUpon>AnimationMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationManager\DataDevices\AnimationProfile.cs" />
+    <Compile Include="AnimationManager\DataDevices\FrameData.cs" />
+    <Compile Include="AnimationManager\DataDevices\PartTree.cs" />
+    <Compile Include="AnimationManager\NewAnimationScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationManager\NewAnimationScreen.Designer.cs">
+      <DependentUpon>NewAnimationScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CharacterScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CharacterScreen.Designer.cs">
+      <DependentUpon>CharacterScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntryForm.Designer.cs">
+      <DependentUpon>EntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationManager\AnimationOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationManager\AnimationOptions.Designer.cs">
+      <DependentUpon>AnimationOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GlobalOptions.Designer.cs">
+      <DependentUpon>GlobalOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SC\GaiaPulse\Animation.cs" />
+    <Compile Include="SC\GaiaPulse\Frame.cs" />
+    <Compile Include="SC\GaiaPulse\Part.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="NewCharacterWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCharacterWizard.Designer.cs">
+      <DependentUpon>NewCharacterWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Global.cs" />
+    <Compile Include="PartManager\EditorData\Camera.cs" />
+    <Compile Include="PartManager\EditorData\Input.cs" />
+    <Compile Include="PartManager\EditorData\TemporaryEditorPart.cs" />
+    <Compile Include="PartManager\PartData\Anchor.cs" />
+    <Compile Include="PartManager\PartData\PartSaveLoad.cs" />
+    <Compile Include="PartManager\PartData\PartCommonData.cs" />
+    <Compile Include="PartManager\PartCostumeSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PartManager\PartCostumeSelect.Designer.cs">
+      <DependentUpon>PartCostumeSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PartManager\PartEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PartManager\PartEditor.Designer.cs">
+      <DependentUpon>PartEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PartManager\PartMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PartManager\PartMain.Designer.cs">
+      <DependentUpon>PartMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PartManager\EditorControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PartManager\TextureAssign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PartManager\TextureAssign.Designer.cs">
+      <DependentUpon>TextureAssign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SC\Primitives.cs" />
+    <Compile Include="SC\TextureManager.cs" />
+    <Compile Include="ToDoList.cs" />
+    <Compile Include="XNA\GraphicsDeviceControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XNA\GraphicsDeviceService.cs" />
+    <Compile Include="XNA\ServiceContainer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextureManager\CostumeAssign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextureManager\CostumeAssign.Designer.cs">
+      <DependentUpon>CostumeAssign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextureManager\TextureMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextureManager\TextureMain.Designer.cs">
+      <DependentUpon>TextureMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextureManager\TextureProfile.cs" />
+    <Compile Include="TextureManager\TextureViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextureManager\TextureViewer.Designer.cs">
+      <DependentUpon>TextureViewer.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AnimationManager\AnimationMain.resx">
+      <DependentUpon>AnimationMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnimationManager\NewAnimationScreen.resx">
+      <DependentUpon>NewAnimationScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CharacterScreen.resx">
+      <DependentUpon>CharacterScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EntryForm.resx">
+      <DependentUpon>EntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnimationManager\AnimationOptions.resx">
+      <DependentUpon>AnimationOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalOptions.resx">
+      <DependentUpon>GlobalOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCharacterWizard.resx">
+      <DependentUpon>NewCharacterWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PartManager\PartCostumeSelect.resx">
+      <DependentUpon>PartCostumeSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PartManager\PartEditor.resx">
+      <DependentUpon>PartEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PartManager\PartMain.resx">
+      <DependentUpon>PartMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PartManager\TextureAssign.resx">
+      <DependentUpon>TextureAssign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="TextureManager\CostumeAssign.resx">
+      <DependentUpon>CostumeAssign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextureManager\TextureMain.resx">
+      <DependentUpon>TextureMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextureManager\TextureViewer.resx">
+      <DependentUpon>TextureViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
