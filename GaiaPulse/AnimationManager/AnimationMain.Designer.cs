@@ -53,6 +53,7 @@
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // cboType
             // 
@@ -62,6 +63,7 @@
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(121, 21);
             this.cboType.TabIndex = 2;
+            this.cboType.SelectedIndexChanged += new System.EventHandler(this.cboType_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -90,6 +92,7 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "Delete";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 

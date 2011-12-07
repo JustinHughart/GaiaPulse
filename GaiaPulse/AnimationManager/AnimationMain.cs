@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
+using GaiaPulse.TextureManager;
 
 namespace GaiaPulse.AnimationManager
 {
@@ -25,15 +27,11 @@ namespace GaiaPulse.AnimationManager
 
             TypeList = new List<String>();
 
-            LoadList();
-
-            foreach (var Type in TypeList)
-            {
-                cboType.Items.Add(Type);
-            }
+            LoadTypeList();
+            LoadAnimList();
         }
 
-        private void LoadList()
+        private void LoadTypeList()
         {
             String FilePath = Global.AppDir + "/CommonData/" + "AnimTypes.dat";
 
@@ -60,6 +58,15 @@ namespace GaiaPulse.AnimationManager
             }
 
             Reader.Close();
+
+            cboType.Items.Add("All");
+
+            foreach (var Type in TypeList)
+            {
+                cboType.Items.Add(Type);
+            }
+
+            cboType.SelectedIndex = 0;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -70,8 +77,97 @@ namespace GaiaPulse.AnimationManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            NewAnimationScreen NewAnimScreen = new NewAnimationScreen(CharacterName, TypeList); 
+            NewAnimationScreen NewAnimScreen = new NewAnimationScreen(CharacterName, TypeList);
             NewAnimScreen.Show();
+        }
+
+        private void LoadAnimList()
+        {
+            lstAnimation.Items.Clear();
+
+            String DirectoryString = Global.AppDir + "/Characters/" + CharacterName + "/Animations/";
+
+            var FileList = Directory.EnumerateFiles(DirectoryString);
+
+            if (cboType.Text == "All")
+            {
+                foreach (var file in FileList)
+                {
+                    String String = file.Substring(DirectoryString.Length);
+
+                    if (String.EndsWith(".gad"))
+                    {
+                        lstAnimation.Items.Add(String.Substring(0, String.Length - 4));
+                    }
+                }
+            }
+            else
+            {
+                AnimationProfile Profile = null;
+
+                foreach (var Path in FileList)
+                {
+                    String String = Path.Substring(DirectoryString.Length);
+
+                    if (String.EndsWith(".gad"))
+                    {
+                        Stream Stream = File.Open(Path, FileMode.Open);
+                        BinaryFormatter Formatter = new BinaryFormatter();
+
+                        Profile = (AnimationProfile)Formatter.Deserialize(Stream);
+                        Stream.Close();
+
+                        if (Profile.Type == cboType.Text)
+                        {
+                            lstAnimation.Items.Add(String.Substring(0, String.Length - 4));
+                        }
+                    }
+                }
+            }
+        }
+
+        private void cboType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadAnimList();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (lstAnimation.SelectedItem != null)
+            {
+                DialogResult Result = MessageBox.Show("Are you sure you want to delete this animation?", "Delete?", MessageBoxButtons.OKCancel);
+
+                if (Result == DialogResult.OK)
+                {
+                    String DeleteFile = lstAnimation.Items[lstAnimation.SelectedIndex].ToString();
+                    File.Delete(Global.AppDir + "/Characters/" + CharacterName + "/Animations/" + DeleteFile + ".gad");
+                    MessageBox.Show("File deleted.");
+                }
+                else
+                {
+                    MessageBox.Show("Deletion aborted.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select an animation to delete first.");
+            }
+
+            LoadAnimList();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (lstAnimation.SelectedItem != null)
+            {
+                AnimationEditor CostumeSelect = new AnimationEditor(lstAnimation.Items[lstAnimation.SelectedIndex].ToString(), CharacterName, CostumeList);
+                CostumeSelect.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select an animation.");
+            }
         }
     }
 }
+

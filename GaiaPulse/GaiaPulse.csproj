@@ -79,6 +79,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnimationManager\AnimationEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationManager\AnimationEditor.Designer.cs">
+      <DependentUpon>AnimationEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationManager\AnimationEditorControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="AnimationManager\AnimationMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +199,9 @@
     <Compile Include="TextureManager\TextureViewer.Designer.cs">
       <DependentUpon>TextureViewer.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AnimationManager\AnimationEditor.resx">
+      <DependentUpon>AnimationEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AnimationManager\AnimationMain.resx">
       <DependentUpon>AnimationMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -253,7 +265,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="AnimationManager\EditorData\" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
