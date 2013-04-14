@@ -6,16 +6,15 @@
 //-----------------------------------------------------------------------------
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace GaiaPulse.XNA
 {
-    
     abstract public class GraphicsDeviceControl : Control
     {
         GraphicsDeviceService graphicsDeviceService;
@@ -27,18 +26,17 @@ namespace GaiaPulse.XNA
         float CurrentMilliseconds;
         int CurrentDraws;
 
-       public GraphicsDevice GraphicsDevice
+        public GraphicsDevice GraphicsDevice
         {
             get { return graphicsDeviceService.GraphicsDevice; }
         }
-
 
         /// <summary>
         /// Gets an IServiceProvider containing our IGraphicsDeviceService.
         /// This can be used with components such as the ContentManager,
         /// which use this service to look up the GraphicsDevice.
         /// </summary>
-        /// 
+        ///
 
         public ServiceContainer Services
         {
@@ -46,8 +44,6 @@ namespace GaiaPulse.XNA
         }
 
         ServiceContainer services = new ServiceContainer();
-
-
 
         /// <summary>
         /// Initializes the control.
@@ -66,13 +62,10 @@ namespace GaiaPulse.XNA
                 Initialize();
 
                 Timer = new Stopwatch();
-
-                
             }
 
             base.OnCreateControl();
         }
-
 
         /// <summary>
         /// Disposes the control.
@@ -88,8 +81,6 @@ namespace GaiaPulse.XNA
             base.Dispose(disposing);
         }
 
-
-
         /// <summary>
         /// Redraws the control in response to a WinForms paint message.
         /// </summary>
@@ -100,7 +91,7 @@ namespace GaiaPulse.XNA
             if (string.IsNullOrEmpty(beginDrawError))
             {
                 // Draw the control using the GraphicsDevice.
-                
+
                 Timer.Restart();
 
                 LogicUpdate();
@@ -108,8 +99,8 @@ namespace GaiaPulse.XNA
                 EndDraw();
 
                 int TimerTime = (int)Timer.ElapsedMilliseconds;
-                
-                float TimeTaken = TimerTime; 
+
+                float TimeTaken = TimerTime;
 
                 CurrentDraws++;
 
@@ -150,16 +141,13 @@ namespace GaiaPulse.XNA
             }
         }
 
-
-
-
         /// <summary>
         /// Attempts to begin drawing the control. Returns an error message string
         /// if this was not possible, which can happen if the graphics device is
         /// lost, or if we are running inside the Form designer.
         /// </summary>
-        /// 
-        string BeginDraw()
+        ///
+        private string BeginDraw()
         {
             // If we have no graphics device, we must be running in the designer.
             if (graphicsDeviceService == null)
@@ -196,14 +184,13 @@ namespace GaiaPulse.XNA
             return null;
         }
 
-
         /// <summary>
         /// Ends drawing the control. This is called after derived classes
         /// have finished their Draw method, and is responsible for presenting
         /// the finished image onto the screen, using the appropriate WinForms
         /// control handle to make sure it shows up in the right place.
         /// </summary>
-        void EndDraw()
+        private void EndDraw()
         {
             try
             {
@@ -219,14 +206,13 @@ namespace GaiaPulse.XNA
             }
         }
 
-
         /// <summary>
         /// Helper used by BeginDraw. This checks the graphics device status,
         /// making sure it is big enough for drawing the current control, and
         /// that the device is not lost. Returns an error string if the device
         /// could not be reset.
         /// </summary>
-        string HandleDeviceReset()
+        private string HandleDeviceReset()
         {
             bool deviceNeedsReset = false;
 
@@ -265,7 +251,6 @@ namespace GaiaPulse.XNA
             return null;
         }
 
-
         /// <summary>
         /// If we do not have a valid graphics device (for instance if the device
         /// is lost, or if we are running inside the Form designer), we must use
@@ -287,7 +272,6 @@ namespace GaiaPulse.XNA
             }
         }
 
-
         /// <summary>
         /// Ignores WinForms paint-background messages. The default implementation
         /// would clear the control to the current background color, causing
@@ -298,25 +282,20 @@ namespace GaiaPulse.XNA
         {
         }
 
-
-
-
         /// <summary>
         /// Derived classes override this to initialize their drawing code.
         /// </summary>
         protected abstract void Initialize();
 
-
         /// <summary>
         /// Derived classes override this to draw themselves using the GraphicsDevice.
         /// </summary>
         protected abstract void Draw();
+
         public abstract void LogicUpdate();
 
-        void UpdateLoop()
+        private void UpdateLoop()
         {
-
         }
-
     }
 }

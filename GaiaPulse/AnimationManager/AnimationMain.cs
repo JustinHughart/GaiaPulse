@@ -1,147 +1,190 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Windows.Forms;
-using GaiaPulse.TextureManager;
 
 namespace GaiaPulse.AnimationManager
 {
     public partial class AnimationMain : Form
     {
         String CharacterName;
+        String CharacterPath;
         List<String> CostumeList;
         List<String> TypeList;
 
-        public AnimationMain(String CharacterName, List<String> CostumeList)
+        public AnimationMain(String CharacterName, String CharacterPath, List<String> CostumeList)
         {
             InitializeComponent();
 
             this.CharacterName = CharacterName;
+            this.CharacterPath = CharacterPath;
             this.CostumeList = CostumeList;
 
             TypeList = new List<String>();
 
-            LoadTypeList();
-            LoadAnimList();
-        }
-
-        private void LoadTypeList()
-        {
-            String FilePath = Global.AppDir + "/CommonData/" + "AnimTypes.dat";
-
-            if (!File.Exists(FilePath))
-            {
-                TextWriter Writer = new StreamWriter(FilePath);
-
-                Writer.WriteLine("Head");
-                Writer.WriteLine("Body");
-                Writer.WriteLine("Weapon");
-
-                Writer.Close();
-            }
-
-            TypeList.Clear();
-
-            TextReader Reader = new StreamReader(FilePath);
-
-            String Line;
-
-            while ((Line = Reader.ReadLine()) != null)
-            {
-                TypeList.Add(Line);
-            }
-
-            Reader.Close();
-
-            cboType.Items.Add("All");
-
-            foreach (var Type in TypeList)
-            {
-                cboType.Items.Add(Type);
-            }
-
-            cboType.SelectedIndex = 0;
+            LoadTree();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            AnimationOptions Options = new AnimationOptions();
-            Options.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            NewAnimationScreen NewAnimScreen = new NewAnimationScreen(CharacterName, TypeList);
-            NewAnimScreen.Show();
-        }
+            String ID = Microsoft.VisualBasic.Interaction.InputBox("Please enter ID name of new animation.", "Folder ID Input");
 
-        private void LoadAnimList()
-        {
-            lstAnimation.Items.Clear();
+            String Path = "";
 
-            String DirectoryString = Global.AppDir + "/Characters/" + CharacterName + "/Animations/";
-
-            var FileList = Directory.EnumerateFiles(DirectoryString);
-
-            if (cboType.Text == "All")
+            if (TreeAnims.SelectedNode == null)
             {
-                foreach (var file in FileList)
-                {
-                    String String = file.Substring(DirectoryString.Length);
+                Path = CharacterPath + "Animations/" + ID + "/";
+            }
+            else
+            {
+                Path = GetNodePath(TreeAnims.SelectedNode) + ID + "/";
+            }
 
-                    if (String.EndsWith(".gad"))
+            if (ID != "")
+            {
+                if (Helper.FileNameValid(ID))
+                {
+                    if (!Directory.Exists(Path))
                     {
-                        lstAnimation.Items.Add(String.Substring(0, String.Length - 4));
+                        Directory.CreateDirectory(Path);
+
+                        AnimationProfile Profile = new AnimationProfile();
+                        Profile.SetID(ID);
+                        SaveAnim(Profile, Path + "animdata.gad");
+                        LoadTree();
                     }
+                    else
+                    {
+                        MessageBox.Show("ID exists already.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("ID is invalid.");
                 }
             }
             else
             {
-                AnimationProfile Profile = null;
+                MessageBox.Show("Please enter the name of the new animation.");
+            }
+        }
 
-                foreach (var Path in FileList)
+        private void SaveAnim(AnimationProfile Profile, String Path)
+        {
+            Stream Stream = File.Open(Path, FileMode.Create);
+            BinaryFormatter Formatter = new BinaryFormatter();
+
+            Formatter.Serialize(Stream, Profile);
+            Stream.Close();
+        }
+
+        private void LoadTree()
+        {
+            String DirectoryPath = CharacterPath + "Animations/";
+
+            TreeAnims.Nodes.Clear();
+
+            var DirectoryList = Directory.EnumerateDirectories(DirectoryPath);
+
+            if (!Directory.Exists(CharacterPath + "Animations/"))
+            {
+                Directory.CreateDirectory(CharacterPath + "Animations/");
+            }
+
+            String Path = CharacterPath + "Animations/";
+
+            RecurseDir(Path, null);
+        }
+
+        private void RecurseDir(String DirPath, TreeNode ParentNode)
+        {
+            var DirectoryList = Directory.EnumerateDirectories(DirPath);
+
+            foreach (var directory in DirectoryList)
+            {
+                String String = "";
+
+                if (Directory.GetFiles(directory).Length > 0)
                 {
-                    String String = Path.Substring(DirectoryString.Length);
+                    String = directory.Substring(DirPath.Length);
+                }
+                else
+                {
+                    String = "!" + directory.Substring(DirPath.Length) + "!";
+                }
 
-                    if (String.EndsWith(".gad"))
-                    {
-                        Stream Stream = File.Open(Path, FileMode.Open);
-                        BinaryFormatter Formatter = new BinaryFormatter();
+                TreeNode Node = new TreeNode(String);
 
-                        Profile = (AnimationProfile)Formatter.Deserialize(Stream);
-                        Stream.Close();
+                if (ParentNode != null)
+                {
+                    ParentNode.Nodes.Add(Node);
+                }
+                else
+                {
+                    TreeAnims.Nodes.Add(Node);
+                }
 
-                        if (Profile.Type == cboType.Text)
-                        {
-                            lstAnimation.Items.Add(String.Substring(0, String.Length - 4));
-                        }
-                    }
+                if (Directory.GetFiles(directory).Length == 0)
+                {
+                    RecurseDir(directory + "/", Node);
                 }
             }
         }
 
         private void cboType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadAnimList();
+            LoadTree();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private String GetNodePath(TreeNode Node)
         {
-            if (lstAnimation.SelectedItem != null)
+            String Path = "";
+
+            bool End = false;
+
+            while (!End)
             {
-                DialogResult Result = MessageBox.Show("Are you sure you want to delete this animation?", "Delete?", MessageBoxButtons.OKCancel);
+                if (Node.Text.StartsWith("!") && Node.Text.EndsWith("!"))
+                {
+                    Path = Node.Text.Substring(1, Node.Text.Length - 2) + "/" + Path;
+                }
+                else
+                {
+                    Path = Node.Text + "/" + Path;
+                }
+
+                if (Node.Parent == null)
+                {
+                    End = true;
+                }
+                else
+                {
+                    Node = Node.Parent;
+                }
+            }
+
+            Path = CharacterPath + "Animations/" + Path;
+
+            return Path;
+        }
+
+        private void button2_Click(object sender, EventArgs e) //Delete Node
+        {
+            if (TreeAnims.SelectedNode != null)
+            {
+                DialogResult Result = MessageBox.Show("Are you sure you want to delete this node and all subnodes?", "Delete?", MessageBoxButtons.OKCancel);
 
                 if (Result == DialogResult.OK)
                 {
-                    String DeleteFile = lstAnimation.Items[lstAnimation.SelectedIndex].ToString();
-                    File.Delete(Global.AppDir + "/Characters/" + CharacterName + "/Animations/" + DeleteFile + ".gad");
-                    MessageBox.Show("File deleted.");
+                    String DeletePath = GetNodePath(TreeAnims.SelectedNode);
+                    Directory.Delete(DeletePath, true);
+                    MessageBox.Show("Node deleted.");
+                    LoadTree();
                 }
                 else
                 {
@@ -150,24 +193,70 @@ namespace GaiaPulse.AnimationManager
             }
             else
             {
-                MessageBox.Show("Select an animation to delete first.");
+                MessageBox.Show("Select a node to delete first.");
             }
 
-            LoadAnimList();
+            LoadTree();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (lstAnimation.SelectedItem != null)
+            if (TreeAnims.SelectedNode != null)
             {
-                AnimationEditor CostumeSelect = new AnimationEditor(lstAnimation.Items[lstAnimation.SelectedIndex].ToString(), CharacterName, CostumeList);
-                CostumeSelect.Show();
+                AnimationEditor Editor = new AnimationEditor(TreeAnims.SelectedNode.Text, CharacterName, CharacterPath, GetNodePath(TreeAnims.SelectedNode));
+                Editor.Show();
             }
             else
             {
                 MessageBox.Show("Please select an animation.");
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            TreeAnims.SelectedNode = null;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (TreeAnims.SelectedNode != null)
+            {
+                if (!TreeAnims.SelectedNode.Text.Contains("!"))
+                {
+                    MessageBox.Show("Cannot place a folder within an part.");
+                    return;
+                }
+            }
+
+            String FolderID = Microsoft.VisualBasic.Interaction.InputBox("Please enter ID name of new folder.", "Folder ID Input");
+
+            if (Helper.FileNameValid(FolderID))
+            {
+                String Path = "";
+
+                if (TreeAnims.SelectedNode == null)
+                {
+                    Path = CharacterPath + "Animations/" + FolderID;
+                }
+                else
+                {
+                    Path = GetNodePath(TreeAnims.SelectedNode) + FolderID;
+                }
+
+                if (!Directory.Exists(Path))
+                {
+                    Directory.CreateDirectory(Path);
+                    LoadTree();
+                }
+                else
+                {
+                    MessageBox.Show("Folder exists.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("ID contains invalid characters.");
+            }
+        }
     }
 }
-

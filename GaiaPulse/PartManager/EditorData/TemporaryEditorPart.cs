@@ -10,7 +10,9 @@ namespace GaiaPulse.PartManager.EditorData
     public class TemporaryEditorPart
     {
         public String TextureName { get; private set; } //Name of the texture used to load the part.
+
         public Rectangle DrawRect { get; private set; } //Drawing area.
+
         [NonSerialized]
         public Texture2D PartTexture; //Texture used for drawing
 
@@ -24,7 +26,7 @@ namespace GaiaPulse.PartManager.EditorData
 
         public void DefaultDrawRect()
         {
-            DrawRect = new Rectangle(0,0, PartTexture.Width, PartTexture.Height);
+            DrawRect = new Rectangle(0, 0, PartTexture.Width, PartTexture.Height);
         }
 
         public void SetTextureName(String NewName)
@@ -56,7 +58,7 @@ namespace GaiaPulse.PartManager.EditorData
         {
             while (Anchors.Count > NumAnchors)
             {
-                Anchors.RemoveAt(Anchors.Count-1);
+                Anchors.RemoveAt(Anchors.Count - 1);
             }
 
             while (Anchors.Count < NumAnchors)
@@ -64,7 +66,5 @@ namespace GaiaPulse.PartManager.EditorData
                 Anchors.Add(new Anchor(Vector2.Zero));
             }
         }
-
-       
     }
 }

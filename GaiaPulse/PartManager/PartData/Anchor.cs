@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-
 namespace GaiaPulse.PartManager.PartData
 {
     [Serializable]

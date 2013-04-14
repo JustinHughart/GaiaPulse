@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Windows.Forms;
 using GaiaPulse.TextureManager;
 
@@ -15,13 +11,15 @@ namespace GaiaPulse.PartManager
     public partial class TextureAssign : Form
     {
         String CharacterName;
+        String CharacterPath;
         String CostumeName;
 
         PartEditor Owner;
 
-        public TextureAssign(String CharacterName, String CostumeName, PartEditor Owner)
+        public TextureAssign(String CharacterName, String CharacterPath, String CostumeName, PartEditor Owner)
         {
             this.CharacterName = CharacterName;
+            this.CharacterPath = CharacterPath;
             this.CostumeName = CostumeName;
             this.Owner = Owner;
             InitializeComponent();
@@ -35,12 +33,11 @@ namespace GaiaPulse.PartManager
 
         private void TextureAssign_Load(object sender, EventArgs e)
         {
-
         }
 
         private void LoadList()
         {
-            String DirectoryString = Global.AppDir + "/Characters/" + CharacterName + "/Textures/";
+            String DirectoryString = CharacterPath + "/Textures/";
 
             List<String> FileList = Directory.EnumerateFiles(DirectoryString).ToList();
 
@@ -72,8 +69,8 @@ namespace GaiaPulse.PartManager
         {
             if (lstTextures.SelectedItem != null)
             {
-                Owner.LoadTexture(Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + lstTextures.SelectedItem + ".png");
-                Owner.SetTexName("Characters/" + CharacterName + "/Textures/" + lstTextures.SelectedItem + ".png");
+                Owner.LoadTexture(CharacterPath + "/Textures/" + lstTextures.SelectedItem + ".png");
+                Owner.SetTexName(lstTextures.SelectedItem + ".png");
                 this.Close();
             }
             else

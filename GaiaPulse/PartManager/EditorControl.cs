@@ -4,7 +4,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using GaiaPulse.PartManager.EditorData;
 using GaiaPulse.PartManager.PartData;
-using GaiaPulse.TextureManager;
 using GaiaPulse.XNA;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -40,12 +39,12 @@ namespace GaiaPulse.PartManager
         Texture2D AnchorTexture;
 
         Primitives Primitives;
-        
-        Vector2 UpperLeft; 
+
+        Vector2 UpperLeft;
         Vector2 UpperRight;
         Vector2 LowerLeft;
         Vector2 LowerRight;
-        
+
         public EditorModeState State;
         Boolean TabDown;
         int AnchorWorkingOn;
@@ -61,7 +60,7 @@ namespace GaiaPulse.PartManager
             Font = Content.Load<SpriteFont>("Fonts/Courier New");
             Camera = new Camera();
 
-            PartPath = Global.AppDir + "/Characters/" + WinForm.CharacterName + "/Parts/" + WinForm.PartName + "/" + WinForm.CostumeName + ".prt";
+            PartPath = WinForm.PartPath + WinForm.CostumeName + ".prt";
 
             LoadPart(PartPath);
 
@@ -75,11 +74,11 @@ namespace GaiaPulse.PartManager
             Input = new Input(new Vector2(WinForm.Width, WinForm.Height));
             Camera.SetRoomSize(new Vector2(WinForm.Width, WinForm.Height));
 
-             RecalcDrawBox(Rectangle.Empty);
+            RecalcDrawBox(Rectangle.Empty);
 
             Application.Idle += delegate { Invalidate(); };
         }
-        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -98,7 +97,7 @@ namespace GaiaPulse.PartManager
 
             if (Part.PartTexture != null)
             {
-                SpriteBatch.Draw(Part.PartTexture, Vector2.Zero, Part.DrawRect, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None,0f);
+                SpriteBatch.Draw(Part.PartTexture, Vector2.Zero, Part.DrawRect, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
                 Primitives.DrawLine(UpperLeft, UpperRight, Color.Red, .0000000009f);
                 Primitives.DrawLine(UpperRight, LowerRight, Color.Red, .0000000009f);
@@ -130,13 +129,12 @@ namespace GaiaPulse.PartManager
 
             SpriteBatch.Begin();
             SpriteBatch.DrawString(Font, "FPS: " + CurrentFPS + ", Mode State: " + State + ", Detection Rectangle: " + DebugRect.ToString() + ", Mouse Pos: " + Input.GetCurrentPosition().ToString(), new Vector2(0, 32), Color.White);
-           
+
             if (State == EditorModeState.SetAnchor)
             {
-                SpriteBatch.DrawString(Font, "Currently editing Anchor " + (AnchorWorkingOn+1), new Vector2(0, 64), Color.White);
-
+                SpriteBatch.DrawString(Font, "Currently editing Anchor " + (AnchorWorkingOn + 1), new Vector2(0, 64), Color.White);
             }
-            SpriteBatch.End(); 
+            SpriteBatch.End();
         }
 
         public override void LogicUpdate()
@@ -180,9 +178,9 @@ namespace GaiaPulse.PartManager
             Part.SetDrawRect(new Rectangle(Part.DrawRect.X + RectVelocity.X, Part.DrawRect.Y + RectVelocity.Y, Part.DrawRect.Width + RectVelocity.Width, Part.DrawRect.Height + RectVelocity.Height));
 
             UpperLeft = new Vector2(0, 0);
-            UpperRight = new Vector2(Part.DrawRect.Width,0);
+            UpperRight = new Vector2(Part.DrawRect.Width, 0);
             LowerLeft = new Vector2(0, Part.DrawRect.Height);
-            LowerRight = new Vector2(Part.DrawRect.Width, Part.DrawRect.Height); 
+            LowerRight = new Vector2(Part.DrawRect.Width, Part.DrawRect.Height);
         }
 
         public void CheckCameraHotkeys()
@@ -215,7 +213,7 @@ namespace GaiaPulse.PartManager
             if (Input.KeyboardState.IsKeyDown(Keys.Down)) //Camera Down
             {
                 Camera.Position.Y++;
-            }  
+            }
         }
 
         public void CheckBoundaryHotkeys()
@@ -314,7 +312,7 @@ namespace GaiaPulse.PartManager
             if (Input.KeyboardState.IsKeyDown(Keys.Left)) //Move anchor point left.
             {
                 Vector2 OldPos = Part.Anchors[AnchorWorkingOn].Position;
-                Part.Anchors[AnchorWorkingOn].SetPosition(new Vector2(OldPos.X -1, OldPos.Y));
+                Part.Anchors[AnchorWorkingOn].SetPosition(new Vector2(OldPos.X - 1, OldPos.Y));
             }
 
             if (Input.KeyboardState.IsKeyDown(Keys.Right)) //Move anchor point right.
@@ -356,7 +354,7 @@ namespace GaiaPulse.PartManager
         {
             if (Input.IsDragging())
             {
-                Camera.MoveCamera(-Input.GetDrag()/Camera.Zoom);
+                Camera.MoveCamera(-Input.GetDrag() / Camera.Zoom);
             }
         }
 
@@ -370,7 +368,6 @@ namespace GaiaPulse.PartManager
 
         public void CheckMouseAnchorControl()
         {
-
         }
 
         public void SetWinForm(PartEditor WinForm)
@@ -399,7 +396,7 @@ namespace GaiaPulse.PartManager
 
                 if (Part.TextureName != "")
                 {
-                    Part.SetPartTexture(LoadTexture(Part.TextureName));
+                    Part.SetPartTexture(LoadTexture(WinForm.CharacterPath + "Textures/" + Part.TextureName));
                 }
             }
             else
@@ -407,6 +404,5 @@ namespace GaiaPulse.PartManager
                 Part = new TemporaryEditorPart();
             }
         }
-
     }
 }

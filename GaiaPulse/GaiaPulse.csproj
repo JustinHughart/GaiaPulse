@@ -14,7 +14,8 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\GP\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,10 +25,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -50,7 +51,32 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Longinus.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>8578A1827A02BF77FD6FA5CC2B85C41BA05120F3</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>GaiaPulse_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.dll</HintPath>
@@ -96,13 +122,8 @@
     </Compile>
     <Compile Include="AnimationManager\DataDevices\AnimationProfile.cs" />
     <Compile Include="AnimationManager\DataDevices\FrameData.cs" />
+    <Compile Include="AnimationManager\DataDevices\PartTag.cs" />
     <Compile Include="AnimationManager\DataDevices\PartTree.cs" />
-    <Compile Include="AnimationManager\NewAnimationScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AnimationManager\NewAnimationScreen.Designer.cs">
-      <DependentUpon>NewAnimationScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="CharacterScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,28 +136,19 @@
     <Compile Include="EntryForm.Designer.cs">
       <DependentUpon>EntryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AnimationManager\AnimationOptions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AnimationManager\AnimationOptions.Designer.cs">
-      <DependentUpon>AnimationOptions.cs</DependentUpon>
-    </Compile>
     <Compile Include="GlobalOptions.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GlobalOptions.Designer.cs">
       <DependentUpon>GlobalOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="SC\DeferredDrawingSystem\DDSList.cs" />
+    <Compile Include="SC\DeferredDrawingSystem\DDSObject.cs" />
     <Compile Include="SC\GaiaPulse\Animation.cs" />
+    <Compile Include="SC\GaiaPulse\EntityFrame.cs" />
     <Compile Include="SC\GaiaPulse\Frame.cs" />
     <Compile Include="SC\GaiaPulse\Part.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="NewCharacterWizard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NewCharacterWizard.Designer.cs">
-      <DependentUpon>NewCharacterWizard.cs</DependentUpon>
-    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="PartManager\EditorData\Camera.cs" />
     <Compile Include="PartManager\EditorData\Input.cs" />
@@ -205,23 +217,14 @@
     <EmbeddedResource Include="AnimationManager\AnimationMain.resx">
       <DependentUpon>AnimationMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AnimationManager\NewAnimationScreen.resx">
-      <DependentUpon>NewAnimationScreen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CharacterScreen.resx">
       <DependentUpon>CharacterScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EntryForm.resx">
       <DependentUpon>EntryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AnimationManager\AnimationOptions.resx">
-      <DependentUpon>AnimationOptions.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GlobalOptions.resx">
       <DependentUpon>GlobalOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NewCharacterWizard.resx">
-      <DependentUpon>NewCharacterWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PartManager\PartCostumeSelect.resx">
       <DependentUpon>PartCostumeSelect.cs</DependentUpon>
@@ -255,6 +258,9 @@
       <DependentUpon>TextureViewer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="GaiaPulse_TemporaryKey.pfx" />
+    <None Include="Longinus.pfx" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -292,6 +298,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CurrentCommitNotes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

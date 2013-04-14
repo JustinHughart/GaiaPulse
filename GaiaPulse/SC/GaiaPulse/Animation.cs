@@ -4,22 +4,30 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SC.GaiaPulse
 {
+    public enum AnimType
+    {
+        NULL, Body, Head, WeaponOne, WeaponTwo,
+    }
+
     public class Animation
     {
-        public int TimingIndex { get; private set; } //The timing index for the animation that determines when it changes frame.
+        public float TimingIndex { get; private set; } //The timing index for the animation that determines when it changes frame.
+
         public int CurrentFrame { get; private set; } //The index of the current frame.
+
         public bool IsLooping { get; private set; } //Whether or not the animation is supposed to loop.
+
         public bool IsFinished { get; private set; } //Indicates when either the animation just looped or if it is finished.
+
         public List<Frame> Frames { get; private set; } //The frames inside the animation.
-        public TextureManager TextureManager { get; private set; } //Temporary location of the texture manager.
-        
-        //!DO NOT LEAVE TEXTURE MANAGER IN HERE, THAT SHOULD BE AN OUTSIDE RESOURCE.
-        //!UPDATE TO INCLUDE NONSTATIC ANIMATION SPEEDS
+
+        public EntityFrame EntityFrame { get; private set; } //The entityframe that this belongs to.
+
+        public AnimType Type { get; private set; } //The type of animation it is.
 
         public Animation() //Constructor, ohboyohboyohboyintializethoselists.
         {
             Frames = new List<Frame>();
-            TextureManager = new TextureManager();
         }
 
         public void SetLooping(bool Looping) //Sets the value of IsLooping.
@@ -27,15 +35,17 @@ namespace SC.GaiaPulse
             IsLooping = Looping;
         }
 
-        public void Update(Vector2 Offset) //Updates the animation. 
+        public void Update(float AnimSpeed, Vector2 Offset, Vector2 GlobalScale, float GlobalRotation) //Updates the animation.
         {
-            TimingIndex++;
+            TimingIndex += AnimSpeed;
             IsFinished = false;
 
-            if (TimingIndex >= Frames[CurrentFrame].ChangeTime)
+            while (TimingIndex >= Frames[CurrentFrame].ChangeTime)
             {
-                TimingIndex = 0;
+                TimingIndex -= Frames[CurrentFrame].ChangeTime;
                 CurrentFrame++;
+
+                EntityFrame.AnimationChanged = true;
 
                 if (CurrentFrame >= Frames.Count)
                 {
@@ -51,7 +61,7 @@ namespace SC.GaiaPulse
                     IsFinished = true;
                 }
             }
-            Frames[CurrentFrame].Update(Offset);
+            Frames[CurrentFrame].Update(Offset, GlobalScale, GlobalRotation);
         }
 
         public bool DoesNextFrameExist() //Checks if the next frame exists.
@@ -69,6 +79,21 @@ namespace SC.GaiaPulse
             Frame.ChangeFrameNumber(Frames.Count);
             Frame.SetAnim(this);
             Frames.Add(Frame);
+        }
+
+        public void SetEntityFrame(EntityFrame EntityFrame)
+        {
+            this.EntityFrame = EntityFrame;
+        }
+
+        public void SetType(AnimType NewType)
+        {
+            Type = NewType;
+        }
+
+        public Frame GetCurrentFrame
+        {
+            get { return Frames[CurrentFrame]; }
         }
     }
 }

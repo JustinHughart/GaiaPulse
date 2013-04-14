@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Windows.Forms;
 
 namespace GaiaPulse.TextureManager
@@ -14,15 +9,17 @@ namespace GaiaPulse.TextureManager
     public partial class TextureMain : Form
     {
         String CharacterName;
+        String CharacterPath;
         List<String> CostumeList;
 
-        public TextureMain(String CharacterName, List<String> CostumeList)
+        public TextureMain(String Name, String Path, List<String> CostumeList)
         {
-            this.CharacterName = CharacterName;
+            CharacterName = Name;
+            CharacterPath = Path;
             this.CostumeList = CostumeList;
             InitializeComponent();
             this.Text = "Texture Manager: " + CharacterName;
-            
+
             LoadList();
         }
 
@@ -30,7 +27,7 @@ namespace GaiaPulse.TextureManager
         {
             lstTextures.Items.Clear();
 
-            String DirectoryString = Global.AppDir + "/Characters/" + CharacterName + "/Textures/";
+            String DirectoryString = CharacterPath + "Textures/";
 
             var FileList = Directory.EnumerateFiles(DirectoryString);
 
@@ -59,17 +56,17 @@ namespace GaiaPulse.TextureManager
 
                 if (Helper.FileNameValid(ID))
                 {
-                    if (File.Exists(Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + Dialog.SafeFileName))
+                    if (File.Exists(CharacterPath + "Textures/" + Dialog.SafeFileName))
                     {
                         MessageBox.Show("File with that name already exists.");
                     }
                     else
                     {
-                        File.Copy(Dialog.FileName, Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + Dialog.SafeFileName);
+                        File.Copy(Dialog.FileName, CharacterPath + "Textures/" + Dialog.SafeFileName);
 
                         TextureProfile NewData = new TextureProfile(ID, new List<String>());
 
-                        String Path = Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + ID + ".tex";
+                        String Path = CharacterPath + "Textures/" + ID + ".tex";
 
                         SerializeTextureData(NewData, Path);
                     }
@@ -78,7 +75,6 @@ namespace GaiaPulse.TextureManager
                 {
                     MessageBox.Show("Name is invalid.");
                 }
-
             }
             catch (NullReferenceException)
             {
@@ -102,8 +98,8 @@ namespace GaiaPulse.TextureManager
 
                 if (File.Exists(Dialog.FileName))
                 {
-                    File.Delete(Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + OldFile);
-                    File.Copy(Dialog.FileName, Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + OldFile);
+                    File.Delete(CharacterPath + "Textures/" + OldFile);
+                    File.Copy(Dialog.FileName, CharacterPath + "Textures/" + OldFile);
                 }
                 else
                 {
@@ -127,8 +123,8 @@ namespace GaiaPulse.TextureManager
                 if (Result == DialogResult.OK)
                 {
                     String DeleteFile = lstTextures.Items[lstTextures.SelectedIndex].ToString();
-                    File.Delete(Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + DeleteFile);
-                    File.Delete(Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + DeleteFile.Substring(0, DeleteFile.Length-4) + ".tex");
+                    File.Delete(CharacterPath + "Textures/" + DeleteFile);
+                    File.Delete(CharacterPath + "Textures/" + DeleteFile.Substring(0, DeleteFile.Length - 4) + ".tex");
                     MessageBox.Show("File deleted.");
                 }
                 else
@@ -150,7 +146,7 @@ namespace GaiaPulse.TextureManager
             {
                 String Temp = lstTextures.Items[lstTextures.SelectedIndex].ToString();
 
-                String Path = Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + Temp.Substring(0, Temp.Length - 4) + ".tex";
+                String Path = CharacterPath + "Textures/" + Temp.Substring(0, Temp.Length - 4) + ".tex";
 
                 CostumeAssign CostumeAssign = new CostumeAssign(CostumeList, Path);
                 CostumeAssign.Show();
@@ -165,7 +161,7 @@ namespace GaiaPulse.TextureManager
         {
             if (lstTextures.SelectedItem != null)
             {
-                String File = Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + lstTextures.Items[lstTextures.SelectedIndex].ToString();
+                String File = CharacterPath + "Textures/" + lstTextures.Items[lstTextures.SelectedIndex].ToString();
 
                 picTexturePreview.ImageLocation = File;
                 picTexturePreview.Load();
@@ -180,7 +176,7 @@ namespace GaiaPulse.TextureManager
         {
             if (lstTextures.SelectedItem != null)
             {
-                String File = Global.AppDir + "/Characters/" + CharacterName + "/Textures/" + lstTextures.Items[lstTextures.SelectedIndex].ToString();
+                String File = CharacterPath + "Textures/" + lstTextures.Items[lstTextures.SelectedIndex].ToString();
 
                 TextureViewer Viewer = new TextureViewer(File);
                 Viewer.Show();

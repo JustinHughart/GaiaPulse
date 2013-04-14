@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 
 namespace GaiaPulse.AnimationManager.DataDevices
@@ -10,7 +7,9 @@ namespace GaiaPulse.AnimationManager.DataDevices
     public class FrameData
     {
         public int FrameNumber { get; private set; } //The number of the frame in the animation.
+
         public PartTree Grandfather { get; private set; }  //The grandfather.
+
         public Vector2 FrameOffset { get; private set; } //The offset of the entire frame.
 
         public void SetFrameNumber(int NewFrameNumber)
@@ -27,6 +26,5 @@ namespace GaiaPulse.AnimationManager.DataDevices
         {
             FrameOffset = NewOffset;
         }
-
     }
 }

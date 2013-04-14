@@ -9,7 +9,6 @@
 
 //xImport SC and XNA libraries.
 
-
 //xCode Texture Manager.
 //x!Fully Integrate XNA Content Pipeline
 
@@ -32,7 +31,7 @@
 //x+Set up frames.
 //x+Set up animation
 //x+Actually make it work how it should.
-//x+Texture Manager with Reference List 
+//x+Texture Manager with Reference List
 //x+Set up drawing of animation.
 //x+Proper Scaling
 //x+Tweening

@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace GaiaPulse
 {
     static public class Helper //A class that helps with various functions.
@@ -148,16 +147,6 @@ namespace GaiaPulse
             }
 
             return returnvalue;
-        }
-
-        public static float DegreesToRadians(float Degrees)
-        {
-            return Degrees*((float) Math.PI/180);
-        }
-
-        public static float RadiansToDegrees(float Radians)
-        {
-            return Radians*(180/(float) Math.PI);
         }
     }
 }

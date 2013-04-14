@@ -5,7 +5,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaiaPulse", "GaiaPulse\Gaia
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaiaPulseData", "GaiaPulseData\GaiaPulseData\GaiaPulseData.csproj", "{481DEBFE-B6A2-47EA-91A1-0628E207BF12}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "GaiaPulseDataContent", "GaiaPulseData\GaiaPulseDataContent\GaiaPulseDataContent.contentproj", "{BE83A896-40F0-4A44-B523-F2E187AFB90C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaiaPulseDataContent", "GaiaPulseData\GaiaPulseDataContent\GaiaPulseDataContent.contentproj", "{BE83A896-40F0-4A44-B523-F2E187AFB90C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C716468F-1103-4282-81C7-D50906581878}"
+	ProjectSection(SolutionItems) = preProject
+		CurrentCommitNotes.txt = CurrentCommitNotes.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

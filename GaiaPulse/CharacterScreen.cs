@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using GaiaPulse.AnimationManager;
 using GaiaPulse.PartManager;
@@ -22,14 +17,17 @@ namespace GaiaPulse
         bool FileInUse = false;
 
         String CharacterName;
-        
-        public CharacterScreen(String Name)
+        String CharacterPath;
+
+        public CharacterScreen(String Name, String Path)
         {
             Textures = new List<string>();
             Parts = new List<string>();
             Animations = new List<string>();
-            
-            LoadCharacter(Name);
+
+            CharacterPath = Path;
+
+            LoadCharacter(Path);
             InitializeComponent();
             Text = "Gaia Pulse: " + Name;
             lblname.Text = Name;
@@ -39,26 +37,24 @@ namespace GaiaPulse
             LoadCostumeList();
         }
 
-        private void LoadCharacter(String Name)
+        private void LoadCharacter(String Path)
         {
-
         }
 
         private void DetectData()
         {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             List<String> CostumeList = new List<string>();
-            
+
             foreach (var item in lstCostumes.Items)
             {
                 CostumeList.Add(item.ToString());
             }
 
-            TextureMain TextureManager = new TextureMain(CharacterName, CostumeList);
+            TextureMain TextureManager = new TextureMain(CharacterName, CharacterPath, CostumeList);
             TextureManager.Show();
         }
 
@@ -71,7 +67,7 @@ namespace GaiaPulse
                 CostumeList.Add(item.ToString());
             }
 
-            PartMain PartsManager = new PartMain(CharacterName, CostumeList);
+            PartMain PartsManager = new PartMain(CharacterName, CharacterPath, CostumeList);
             PartsManager.Show();
         }
 
@@ -79,8 +75,8 @@ namespace GaiaPulse
         {
             lstCostumes.Items.Clear();
 
-            String FilePath = Global.AppDir + "/Characters/" + CharacterName + "/CostumeList.txt";
-            
+            String FilePath = CharacterPath + "CostumeList.txt";
+
             if (File.Exists(FilePath))
             {
                 if (FileInUse == false)
@@ -138,7 +134,7 @@ namespace GaiaPulse
             {
                 FileInUse = true;
 
-                String FilePath = Global.AppDir + "/Characters/" + CharacterName + "/CostumeList.txt";
+                String FilePath = CharacterPath + "CostumeList.txt";
 
                 File.Delete(FilePath);
 
@@ -193,7 +189,7 @@ namespace GaiaPulse
                 CostumeList.Add(item.ToString());
             }
 
-            AnimationMain AnimationMain = new AnimationMain(CharacterName, CostumeList);
+            AnimationMain AnimationMain = new AnimationMain(CharacterName, CharacterPath, CostumeList);
             AnimationMain.Show();
         }
     }

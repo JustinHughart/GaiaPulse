@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace GaiaPulse.PartManager.EditorData
@@ -24,7 +20,6 @@ namespace GaiaPulse.PartManager.EditorData
             this.WindowSize = WindowSize;
         }
 
-
         public void Update()
         {
             KeyboardState = Keyboard.GetState();
@@ -32,7 +27,7 @@ namespace GaiaPulse.PartManager.EditorData
             PreviousState = CurrentState;
             PreviousPosition = CurrentPosition;
             CurrentState = MouseState.LeftButton;
-            CurrentPosition = new Vector2(MouseState.X, MouseState.Y) + new Vector2(0,-50);
+            CurrentPosition = new Vector2(MouseState.X, MouseState.Y) + new Vector2(0, -50);
         }
 
         public bool IsDown(Rectangle Rect)
@@ -166,4 +161,3 @@ namespace GaiaPulse.PartManager.EditorData
         }
     }
 }
-

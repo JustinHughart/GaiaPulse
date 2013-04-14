@@ -1,11 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Windows.Forms;
-using GaiaPulse.XNA;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using SC;
+﻿using Microsoft.Xna.Framework;
 
 namespace GaiaPulse.PartManager.EditorData
 {
@@ -29,7 +22,7 @@ namespace GaiaPulse.PartManager.EditorData
 
         public Matrix ReturnView()
         {
-            return Matrix.CreateTranslation(Position.X, Position.Y, 0) * Matrix.CreateTranslation(new Vector3(-RoomSize.X / 2, -RoomSize.Y / 2, 0)) * Matrix.CreateScale(Zoom) * Matrix.CreateTranslation(new Vector3(RoomSize.X/2, RoomSize.Y/2, 0));
+            return Matrix.CreateTranslation(Position.X, Position.Y, 0) * Matrix.CreateTranslation(new Vector3(-RoomSize.X / 2, -RoomSize.Y / 2, 0)) * Matrix.CreateScale(Zoom) * Matrix.CreateTranslation(new Vector3(RoomSize.X / 2, RoomSize.Y / 2, 0));
         }
 
         public void MoveCamera(Vector2 Velocity)
@@ -41,6 +34,5 @@ namespace GaiaPulse.PartManager.EditorData
         {
             Zoom += AddedValue;
         }
-
     }
 }

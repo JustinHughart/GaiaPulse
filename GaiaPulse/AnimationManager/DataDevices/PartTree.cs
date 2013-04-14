@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GaiaPulse.AnimationManager
 {
@@ -9,7 +7,9 @@ namespace GaiaPulse.AnimationManager
     public class PartTree
     {
         public String ID { get; private set; } //The ID of the part that exists as is in the tree.
+
         public String Parent { get; private set; } //The ID of the parent to which the part belongs.
+
         public List<String> Children { get; private set; } //The IDs of all the children that the Part has.
 
         public void SetID(String NewID)

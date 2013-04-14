@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Windows.Forms;
 using GaiaPulse.PartManager.PartData;
 
@@ -16,12 +11,16 @@ namespace GaiaPulse.PartManager
     {
         String PartName;
         String CharacterName;
+        String CharacterPath;
+        String PartPath;
         List<String> CostumeList;
         PartCommonData CommonData;
-        
-        public PartCostumeSelect(String PartName,  String CharacterName, List<String> CostumeList)
+
+        public PartCostumeSelect(String PartName, String CharacterName, String CharacterPath, String PartPath, List<String> CostumeList)
         {
             this.CharacterName = CharacterName;
+            this.CharacterPath = CharacterPath;
+            this.PartPath = PartPath;
             this.CostumeList = CostumeList;
             this.PartName = PartName;
             InitializeComponent();
@@ -38,7 +37,7 @@ namespace GaiaPulse.PartManager
         {
             CommonData.SetAnchorNumber((int)numericUpDown1.Value);
 
-            String Path = Global.AppDir + "/Characters/" + CharacterName + "/Parts/" + PartName + "/commondata.dat";
+            String Path = PartPath + "/commondata.dat";
 
             SerializeCommonData(CommonData, Path);
         }
@@ -63,7 +62,7 @@ namespace GaiaPulse.PartManager
 
         private void LoadData()
         {
-            String Path = Global.AppDir + "/Characters/" + CharacterName + "/Parts/" + PartName + "/commondata.dat";
+            String Path = PartPath + "/commondata.dat";
             LoadSerializedCommonData(Path);
             numericUpDown1.Value = CommonData.AnchorPoints;
         }
@@ -78,7 +77,7 @@ namespace GaiaPulse.PartManager
             if (lstCostume.SelectedItem != null)
             {
                 LoadData();
-                PartEditor Editor = new PartEditor(CharacterName, PartName, lstCostume.SelectedItem.ToString(), int.Parse(numericUpDown1.Text));
+                PartEditor Editor = new PartEditor(CharacterName, CharacterPath, PartName, PartPath, lstCostume.SelectedItem.ToString(), int.Parse(numericUpDown1.Text));
                 Editor.Show();
             }
             else

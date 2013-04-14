@@ -5,14 +5,14 @@ namespace GaiaPulse.TextureManager
 {
     public partial class TextureViewer : Form //Lets you view a texture.
     {
-        public TextureViewer(String ImagePath) 
+        public TextureViewer(String ImagePath)
         {
             InitializeComponent();
 
             picTexture.Load(ImagePath);
 
             int end;
-            
+
             bool stop = false;
 
             for (end = ImagePath.Length - 1; stop == false; end--)
@@ -25,7 +25,6 @@ namespace GaiaPulse.TextureManager
             }
 
             this.Text = "Texture Viewer: " + ImagePath.Substring(end);
-
         }
     }
 }

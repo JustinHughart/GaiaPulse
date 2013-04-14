@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GaiaPulse.XNA
 {
-    class GraphicsDeviceService: IGraphicsDeviceService
+    internal class GraphicsDeviceService : IGraphicsDeviceService
     {
         static GraphicsDeviceService SingletonInstance;
 
@@ -26,7 +26,7 @@ namespace GaiaPulse.XNA
         public event EventHandler<EventArgs> DeviceReset;
         public event EventHandler<EventArgs> DeviceResetting;
 
-        GraphicsDeviceService(IntPtr WindowHandle, int Width, int Height)
+        private GraphicsDeviceService(IntPtr WindowHandle, int Width, int Height)
         {
             parameters = new PresentationParameters();
             parameters.BackBufferWidth = Math.Max(Width, 1);
@@ -52,7 +52,7 @@ namespace GaiaPulse.XNA
 
         public void Release(bool disposing)
         {
-           if (Interlocked.Decrement(ref ReferenceCount) == 0)
+            if (Interlocked.Decrement(ref ReferenceCount) == 0)
             {
                 if (disposing)
                 {

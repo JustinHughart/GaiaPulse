@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Windows.Forms;
 
 namespace GaiaPulse.TextureManager
@@ -16,12 +11,11 @@ namespace GaiaPulse.TextureManager
         String FilePath;
         TextureProfile Profile;
         bool FileInUse = false;
-    
 
         public CostumeAssign(List<String> Costumes, String LoadPath)
         {
             InitializeComponent();
-            
+
             FilePath = LoadPath;
 
             foreach (String Costume in Costumes)
@@ -41,16 +35,13 @@ namespace GaiaPulse.TextureManager
                 }
             }
 
-            this.Text = "Assign Texture To Costume(s): " +FilePath.Substring(end, FilePath.Substring(end).Length - 4);
+            this.Text = "Assign Texture To Costume(s): " + FilePath.Substring(end, FilePath.Substring(end).Length - 4);
 
-            LoadAssignedList(FilePath); 
-
-            
+            LoadAssignedList(FilePath);
         }
 
         private void CostumeAssign_Load(object sender, EventArgs e)
         {
-
         }
 
         private void LoadAssignedList(String Path)
@@ -60,7 +51,7 @@ namespace GaiaPulse.TextureManager
 
             Profile = (TextureProfile)Formatter.Deserialize(Stream);
             Stream.Close();
-            
+
             foreach (String Costume in Profile.CostumeList)
             {
                 lstAssigned.Items.Add(Costume);
