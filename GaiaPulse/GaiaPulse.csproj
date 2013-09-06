@@ -58,7 +58,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Longinus.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>8578A1827A02BF77FD6FA5CC2B85C41BA05120F3</ManifestCertificateThumbprint>
@@ -105,138 +106,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnimationManager\AnimDataFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationManager\AnimDataFrame.Designer.cs">
+      <DependentUpon>AnimDataFrame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationManager\CycleManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationManager\CycleManager.Designer.cs">
+      <DependentUpon>CycleManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationManager\NodeDataFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationManager\NodeDataFrame.Designer.cs">
+      <DependentUpon>NodeDataFrame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationManager\NodeProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationManager\NodeProperties.Designer.cs">
+      <DependentUpon>NodeProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="AnimationManager\EditorData\Camera.cs" />
+    <Compile Include="AnimationManager\EditorData\Input.cs" />
     <Compile Include="AnimationManager\AnimationEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AnimationManager\AnimationEditor.Designer.cs">
       <DependentUpon>AnimationEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="AnimationManager\AnimationEditorControl.cs">
+    <Compile Include="AnimationManager\EditorControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AnimationManager\AnimationMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AnimationManager\AnimationMain.Designer.cs">
-      <DependentUpon>AnimationMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AnimationManager\DataDevices\AnimationProfile.cs" />
-    <Compile Include="AnimationManager\DataDevices\FrameData.cs" />
-    <Compile Include="AnimationManager\DataDevices\PartTag.cs" />
-    <Compile Include="AnimationManager\DataDevices\PartTree.cs" />
-    <Compile Include="CharacterScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CharacterScreen.Designer.cs">
-      <DependentUpon>CharacterScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EntryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EntryForm.Designer.cs">
-      <DependentUpon>EntryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GlobalOptions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GlobalOptions.Designer.cs">
-      <DependentUpon>GlobalOptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SC\DeferredDrawingSystem\DDSList.cs" />
-    <Compile Include="SC\DeferredDrawingSystem\DDSObject.cs" />
-    <Compile Include="SC\GaiaPulse\Animation.cs" />
-    <Compile Include="SC\GaiaPulse\EntityFrame.cs" />
-    <Compile Include="SC\GaiaPulse\Frame.cs" />
-    <Compile Include="SC\GaiaPulse\Part.cs" />
-    <Compile Include="Helper.cs" />
-    <Compile Include="Global.cs" />
-    <Compile Include="PartManager\EditorData\Camera.cs" />
-    <Compile Include="PartManager\EditorData\Input.cs" />
-    <Compile Include="PartManager\EditorData\TemporaryEditorPart.cs" />
-    <Compile Include="PartManager\PartData\Anchor.cs" />
-    <Compile Include="PartManager\PartData\PartSaveLoad.cs" />
-    <Compile Include="PartManager\PartData\PartCommonData.cs" />
-    <Compile Include="PartManager\PartCostumeSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PartManager\PartCostumeSelect.Designer.cs">
-      <DependentUpon>PartCostumeSelect.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PartManager\PartEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PartManager\PartEditor.Designer.cs">
-      <DependentUpon>PartEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PartManager\PartMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PartManager\PartMain.Designer.cs">
-      <DependentUpon>PartMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PartManager\EditorControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PartManager\TextureAssign.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PartManager\TextureAssign.Designer.cs">
-      <DependentUpon>TextureAssign.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SC\Primitives.cs" />
+    <Compile Include="SC\FrameAnimation\AnimBase.cs" />
+    <Compile Include="SC\FrameAnimation\BoundBox.cs" />
+    <Compile Include="SC\FrameAnimation\FrameAnimation.cs" />
+    <Compile Include="SC\FrameAnimation\AnimNode.cs" />
+    <Compile Include="SC\FrameAnimation\DrawData.cs" />
     <Compile Include="SC\TextureManager.cs" />
-    <Compile Include="ToDoList.cs" />
+    <Compile Include="SC\Primitives.cs" />
     <Compile Include="XNA\GraphicsDeviceControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="XNA\GraphicsDeviceService.cs" />
     <Compile Include="XNA\ServiceContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextureManager\CostumeAssign.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TextureManager\CostumeAssign.Designer.cs">
-      <DependentUpon>CostumeAssign.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TextureManager\TextureMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TextureManager\TextureMain.Designer.cs">
-      <DependentUpon>TextureMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TextureManager\TextureProfile.cs" />
-    <Compile Include="TextureManager\TextureViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TextureManager\TextureViewer.Designer.cs">
-      <DependentUpon>TextureViewer.cs</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="AnimationManager\AnimDataFrame.resx">
+      <DependentUpon>AnimDataFrame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnimationManager\CycleManager.resx">
+      <DependentUpon>CycleManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnimationManager\NodeDataFrame.resx">
+      <DependentUpon>NodeDataFrame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnimationManager\NodeProperties.resx">
+      <DependentUpon>NodeProperties.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AnimationManager\AnimationEditor.resx">
       <DependentUpon>AnimationEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnimationManager\AnimationMain.resx">
-      <DependentUpon>AnimationMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CharacterScreen.resx">
-      <DependentUpon>CharacterScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EntryForm.resx">
-      <DependentUpon>EntryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GlobalOptions.resx">
-      <DependentUpon>GlobalOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PartManager\PartCostumeSelect.resx">
-      <DependentUpon>PartCostumeSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PartManager\PartEditor.resx">
-      <DependentUpon>PartEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PartManager\PartMain.resx">
-      <DependentUpon>PartMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PartManager\TextureAssign.resx">
-      <DependentUpon>TextureAssign.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -248,18 +181,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="TextureManager\CostumeAssign.resx">
-      <DependentUpon>CostumeAssign.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TextureManager\TextureMain.resx">
-      <DependentUpon>TextureMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TextureManager\TextureViewer.resx">
-      <DependentUpon>TextureViewer.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="GaiaPulse_TemporaryKey.pfx" />
-    <None Include="Longinus.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -271,9 +193,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AnimationManager\EditorData\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
@@ -298,9 +218,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CurrentCommitNotes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

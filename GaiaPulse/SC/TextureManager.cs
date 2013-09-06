@@ -1,176 +1,129 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.Xna.Framework.Content;
+using GaiaPulse.AnimationManager;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SC
+namespace GaiaPulse.SC
 {
-    public static class TextureManager //Holds a list of textures and a list of references to said textures. Also handles the disposing and loading of said textures.
+    /// <summary>
+    /// Holds textures for the program.
+    /// </summary>
+    public static class TextureManager 
     {
-        private static Dictionary<String, Texture2D> TextureDictionary; //A list of textures.
-        private static Dictionary<String, List<Object>> ReferenceList; //A list of objects that are referencing the textures.
-        private static ContentManager Content; //Used for loading content.
+        /// <summary>
+        /// The texture dictionary for storing textures.
+        /// </summary>
+        static private Dictionary<String, Texture2D> _texturedictionary; //A list of textures.
 
-        public static bool Initialized { get; private set; } //Whether or not the texture manager is initialized. Captain Obvious, up and away!
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="TextureManager"/> is initialized.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if initialized; otherwise, <c>false</c>.
+        /// </value>
+        static public bool Initialized { get; private set; } 
 
-        private static GraphicsDevice GraphicsDevice;
+        /// <summary>
+        /// The graphics device, for loading textures.
+        /// </summary>
+        static private GraphicsDevice _gfx;
 
-        public static void InitializeWithoutContent(GraphicsDevice GFX)
+        /// <summary>
+        /// Initializes the texture manager. If texture manager is already initializes, restores the manager to its initial state by clearing and disposing of textures.
+        /// </summary>
+        /// <param name="gfx">The graphics device, for loading images.</param>
+        static public void Initialize(GraphicsDevice gfx) 
         {
+            _gfx = gfx;
+
+            //Disposes of any textures before reinitializing.
+
             if (Initialized)
             {
-                foreach (var Texture in TextureDictionary)
+                foreach (var texture in _texturedictionary)
                 {
-                    Texture.Value.Dispose();
+                    texture.Value.Dispose();
                 }
             }
 
-            TextureDictionary = new Dictionary<String, Texture2D>();
-            ReferenceList = new Dictionary<String, List<Object>>();
-            GraphicsDevice = GFX;
+            _texturedictionary = new Dictionary<String, Texture2D>();
             Initialized = true;
         }
 
-        public static void Initialize(ContentManager NewContent) //Initialization method. Assigns a ContentManager and initializes the class. Also disposes of textures if the class is already initialized.
+        /// <summary>
+        /// Returns a texture. If it doesn't exist, load it. Appends the texture folder to the name to make the ID.
+        /// </summary>
+        /// <param name="name">The name of the texture.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">Texture manager not initialized.</exception>
+        static public Texture2D GetTexture(String name) 
         {
+            //Make the ID.
+
+            name = name.Substring(name.LastIndexOf('/') + 1);
+            String id = "TempSprites/" + name;
+
+            //Check for proper initialization.
+
             if (Initialized)
             {
-                foreach (var Texture in TextureDictionary)
-                {
-                    Texture.Value.Dispose();
-                }
-            }
+                //Check if the texture manager has the texture already.
 
-            TextureDictionary = new Dictionary<String, Texture2D>();
-            ReferenceList = new Dictionary<String, List<Object>>();
-            Content = NewContent;
-            Initialized = true;
-        }
-
-        public static Texture2D GetTexture(String Name, Object Object) //Returns a texture. If the texture exists, it returns the texture, otherwise it loads it into the texture dictionary and then returns it. Also adds the reference to the reference list.
-        {
-            if (Initialized)
-            {
-                if (TextureDictionary.ContainsKey(Name))
+                if (_texturedictionary.ContainsKey(name))
                 {
-                    AddReference(Name, Object);
-                    return TextureDictionary[Name];
+                    //If it does, return it.
+
+                    return _texturedictionary[name];
                 }
                 else
                 {
-                    TextureDictionary.Add(Name, Content.Load<Texture2D>(Name));
-                    AddReference(Name, Object);
-                    return TextureDictionary[Name];
-                }
-            }
+                    //If it doesn't, load it.
 
-            throw new Exception("Texture manager is not initialized.");
-        }
+                    Texture2D newTexture = null;
+                    Stream stream = File.OpenRead(name);
 
-        public static Texture2D GetTextureFromFile(String Name, Object Object)
-        {
-            if (Initialized && GraphicsDevice != null)
-            {
-                if (TextureDictionary.ContainsKey(Name))
-                {
-                    AddReference(Name, Object);
-                    return TextureDictionary[Name];
-                }
-                else
-                {
-                    Stream Stream = File.OpenRead(Name);
+                    newTexture = Texture2D.FromStream(_gfx, stream);
+                    
+                    //Get color data, for color keying.
 
-                    Texture2D OutputTexture = Texture2D.FromStream(GraphicsDevice, Stream);
+                    Color[] colordata = new Color[newTexture.Width * newTexture.Height];
+                    newTexture.GetData(colordata);
 
-                    Stream.Close();
-
-                    TextureDictionary.Add(Name, OutputTexture);
-                    AddReference(Name, Object);
-                    return TextureDictionary[Name];
-                }
-            }
-
-            throw new Exception("Texture manager is not initialized for files.");
-        }
-
-        private static void AddReference(String Name, Object Object) //Adds a reference to the reference list, creating the list if necessary.
-        {
-            if (ReferenceList.ContainsKey(Name))
-            {
-                if (!ReferenceList[Name].Contains(Object))
-                {
-                    ReferenceList[Name].Add(Object);
-                }
-            }
-            else
-            {
-                List<Object> NewList = new List<Object>();
-                NewList.Add(Object);
-                ReferenceList.Add(Name, NewList);
-            }
-        }
-
-        public static void RemoveReference(String Name, Object Object) //Removes a reference, disposing of the texture if necessary.
-        {
-            if (Initialized)
-            {
-                if (ReferenceList.ContainsKey(Name))
-                {
-                    if (ReferenceList[Name].Contains(Object))
+                    for (int i = 0; i < colordata.Length; i++)
                     {
-                        ReferenceList[Name].Remove(Object);
+                        //Check every color for death magenta and set it to transparent.
 
-                        if (ReferenceList[Name].Count == 0)
+                        Color color = colordata[i];
+
+                        if (color.R == 255 && color.G == 0 && color.B == 255)
                         {
-                            ReferenceList.Remove(Name);
-
-                            TextureDictionary[Name].Dispose();
-                            TextureDictionary.Remove(Name);
+                            color.R = 0;
+                            color.G = 0;
+                            color.B = 0;
+                            color.A = 0;
+                            colordata[i] = color;
                         }
                     }
-                    else
-                    {
-                        throw new Exception("Object was not referencing " + Name);
-                    }
-                }
-                else
-                {
-                    throw new Exception("Reference does not exist.");
+
+                    //Set the data and the name.
+
+                    newTexture.SetData(colordata);
+                    newTexture.Name = id;
+                    
+                    //Adds the texture to the dictionary.
+
+                    _texturedictionary.Add(name, newTexture);
+
+                    return _texturedictionary[name];
                 }
             }
             else
             {
-                throw new Exception("Texture Manager not initialized.");
+                throw new Exception("Texture manager not initialized");
             }
-        }
-
-        public static void ClearTextures() //Disposes of all the textures and clears the texture dictionary and reference list.
-        {
-            if (Initialized)
-            {
-                foreach (var Texture in TextureDictionary)
-                {
-                    Texture.Value.Dispose();
-                }
-
-                TextureDictionary.Clear();
-                ReferenceList.Clear();
-            }
-            else
-            {
-                throw new Exception("Texture manager is not initialized.");
-            }
-        }
-
-        public static List<Object> GetReferenceList(String Name) //Returns the reference list itself. Why? I'm not sure but hey, it's functionality.
-        {
-            if (ReferenceList.ContainsKey(Name))
-            {
-                return ReferenceList[Name];
-            }
-
-            return null;
         }
     }
 }

@@ -2,56 +2,124 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SC
+namespace GaiaPulse.SC
 {
-    public class Primitives //Draws lines and rectangles onscreen.
+    /// <summary>
+    /// Draws primitives in XNA using the sprite batcher.
+    /// </summary>
+    public class Primitives
     {
-        SpriteBatch SpriteBatch; //Sprite batch used to draw primitives.
-        Texture2D LineTexture; //Texture used for drawing lines.
-        Texture2D RectTexture;  //+Texture used for drawing rects.
+        /// <summary>
+        /// The sprite batch used for drawing.
+        /// </summary>
+        SpriteBatch _spritebatch;
+        /// <summary>
+        /// The texture of the line. Should be n*n in size.
+        /// </summary>
+        Texture2D _lineTexture;
+        /// <summary>
+        /// The texture for rects. Must be 1*1 in size to work right.
+        /// </summary>
+        Texture2D _rectTexture;
 
-        public Primitives(SpriteBatch SpriteBatch, Texture2D LineTexture, Texture2D RectTexture) //Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Primitives"/> class.
+        /// </summary>
+        /// <param name="spritebatch">The sprite batch used for drawing.</param>
+        /// <param name="lineTexture">The texture of the line. Should be n*n in size.</param>
+        /// <param name="rectTexture">The texture for rects. Must be 1*1 in size to work right.</param>
+        public Primitives(SpriteBatch spritebatch, Texture2D lineTexture, Texture2D rectTexture)
         {
-            this.SpriteBatch = SpriteBatch;
-            this.LineTexture = LineTexture;
-            this.RectTexture = RectTexture;
+            this._spritebatch = spritebatch;
+            this._lineTexture = lineTexture;
+            this._rectTexture = rectTexture;
         }
 
-        public void DrawLine(Vector2 A, Vector2 B) //Forcibly draw a line from point a to b.
+        /// <summary>
+        /// Draws a line from A to B..
+        /// </summary>
+        /// <param name="a">The starting point.</param>
+        /// <param name="b">The ending point.</param>
+        public void DrawLine(Vector2 a, Vector2 b) 
         {
-            DrawLine(A, B, Color.White);
+            DrawLine(a, b, Color.Black);
         }
 
-        public void DrawLine(Vector2 A, Vector2 B, Color Color) //Forcibly draw a line of a specific color from point a to b.
+        /// <summary>
+        /// Draws a line from A to B..
+        /// </summary>
+        /// <param name="a">The starting point.</param>
+        /// <param name="b">The ending point.</param>
+        /// <param name="color">The color of the line.</param>
+        public void DrawLine(Vector2 a, Vector2 b, Color color) 
         {
-            DrawLine(A, B, Color, 1f);
+            DrawLine(a, b, color, 0f);
         }
 
-        public void DrawLine(Vector2 A, Vector2 B, Color Color, float Layer) //Forcibly draw a line of specific color and layer from point a to b.
+        /// <summary>
+        /// Draws a line from A to B..
+        /// </summary>
+        /// <param name="a">The starting point.</param>
+        /// <param name="b">The ending point.</param>
+        /// <param name="color">The color of the line.</param>
+        /// <param name="layer">The layer to draw the line on.</param>
+        public void DrawLine(Vector2 a, Vector2 b, Color color, float layer) 
         {
             Vector2 origin = new Vector2(0.5f, 0.0f);
-            Vector2 difference = B - A;
-            Vector2 scale = new Vector2(1.0f, difference.Length() / LineTexture.Height);
+            Vector2 difference = b - a;
+            Vector2 scale = new Vector2(1.0f, difference.Length() / _lineTexture.Height);
             float angle = (float)(Math.Atan2(difference.Y, difference.X)) - MathHelper.PiOver2;
 
-            SpriteBatch.Draw(LineTexture, A, null, Color, angle, origin, scale, SpriteEffects.None, Layer);
+            _spritebatch.Draw(_lineTexture, a, null, color, angle, origin, scale, SpriteEffects.None, layer);
         }
 
-        public void DrawRect(Vector2 A, Vector2 B) //Forcibly draw a rect from point a to b.
+        /// <summary>
+        /// Draws a rectangle from point A to B.
+        /// </summary>
+        /// <param name="a">The upperleft point of the rectangle.</param>
+        /// <param name="b">The lowerright point of the rectangle.</param>
+        public void DrawRect(Vector2 a, Vector2 b)
         {
-            DrawRect(A, B, Color.White);
+            DrawRect(a, b, Color.Black);
         }
 
-        public void DrawRect(Vector2 A, Vector2 B, Color Color) //Forcibly draw a rect of a specific color from point a to b.
+        /// <summary>
+        /// Draws a rectangle from point A to B.
+        /// </summary>
+        /// <param name="a">The upperleft point of the rectangle.</param>
+        /// <param name="b">The lowerright point of the rectangle.</param>
+        /// <param name="color">The color of the rectangle.</param>
+        public void DrawRect(Vector2 a, Vector2 b, Color color)
         {
-            DrawRect(A, B, Color.White, 1f);
+            DrawRect(a, b, color, 0f);
         }
 
-        public void DrawRect(Vector2 A, Vector2 B, Color Color, float Layer) //Forcibly draw a rect of specific color and layer from point a to b.
+        /// <summary>
+        /// Draws a rectangle from point A to B.
+        /// </summary>
+        /// <param name="a">The upperleft point of the rectangle.</param>
+        /// <param name="b">The lowerright point of the rectangle.</param>
+        /// <param name="color">The color of the rectangle.</param>
+        /// <param name="layer">The layer to draw the rectangle on.</param>
+        public void DrawRect(Vector2 a, Vector2 b, Color color, float layer)
         {
-            Vector2 scale = B - A;
+            Vector2 scale = b - a;
 
-            SpriteBatch.Draw(RectTexture, A, null, Color, 0f, Vector2.Zero, scale, SpriteEffects.None, Layer);
+            _spritebatch.Draw(_rectTexture, a, null, color, 0f, Vector2.Zero, scale, SpriteEffects.None, layer);
+        }
+
+        /// <summary>
+        /// Draws a rectangle from point A to B.
+        /// </summary>
+        /// <param name="rect">The rectangle to draw.</param>
+        /// <param name="color">The color of the rectangle.</param>
+        /// <param name="layer">The layer to draw the rectangle on.</param>
+        public void DrawRect(Rectangle rect, Color color, float layer)
+        {
+            Vector2 a = new Vector2(rect.X, rect.Y);
+            Vector2 b = new Vector2(rect.X + rect.Width, rect.Y + rect.Height);
+
+            DrawRect(a, b, color, layer);
         }
     }
 }

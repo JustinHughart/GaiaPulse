@@ -7,11 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaiaPulseData", "GaiaPulseD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaiaPulseDataContent", "GaiaPulseData\GaiaPulseDataContent\GaiaPulseDataContent.contentproj", "{BE83A896-40F0-4A44-B523-F2E187AFB90C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C716468F-1103-4282-81C7-D50906581878}"
-	ProjectSection(SolutionItems) = preProject
-		CurrentCommitNotes.txt = CurrentCommitNotes.txt
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86

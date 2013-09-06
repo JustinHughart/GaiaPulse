@@ -17,18 +17,18 @@ namespace GaiaPulse.XNA
 {
     abstract public class GraphicsDeviceControl : Control
     {
-        GraphicsDeviceService graphicsDeviceService;
+        GraphicsDeviceService _graphicsDeviceService;
 
-        Stopwatch Timer;
+        Stopwatch _timer;
 
         const int FPS = 60;
         protected int CurrentFPS;
-        float CurrentMilliseconds;
-        int CurrentDraws;
+        float _currentMilliseconds;
+        int _currentDraws;
 
         public GraphicsDevice GraphicsDevice
         {
-            get { return graphicsDeviceService.GraphicsDevice; }
+            get { return _graphicsDeviceService.GraphicsDevice; }
         }
 
         /// <summary>
@@ -40,10 +40,10 @@ namespace GaiaPulse.XNA
 
         public ServiceContainer Services
         {
-            get { return services; }
+            get { return _services; }
         }
 
-        ServiceContainer services = new ServiceContainer();
+        ServiceContainer _services = new ServiceContainer();
 
         /// <summary>
         /// Initializes the control.
@@ -53,15 +53,15 @@ namespace GaiaPulse.XNA
             // Don't initialize the graphics device if we are running in the designer.
             if (!DesignMode)
             {
-                graphicsDeviceService = GraphicsDeviceService.AddRef(Handle, ClientSize.Width, ClientSize.Height);
+                _graphicsDeviceService = GraphicsDeviceService.AddRef(Handle, ClientSize.Width, ClientSize.Height);
 
                 // Register the service, so components like ContentManager can find it.
-                services.AddService<IGraphicsDeviceService>(graphicsDeviceService);
+                _services.AddService<IGraphicsDeviceService>(_graphicsDeviceService);
 
                 // Give derived classes a chance to initialize themselves.
                 Initialize();
 
-                Timer = new Stopwatch();
+                _timer = new Stopwatch();
             }
 
             base.OnCreateControl();
@@ -72,10 +72,10 @@ namespace GaiaPulse.XNA
         /// </summary>
         protected override void Dispose(bool disposing)
         {
-            if (graphicsDeviceService != null)
+            if (_graphicsDeviceService != null)
             {
-                graphicsDeviceService.Release(disposing);
-                graphicsDeviceService = null;
+                _graphicsDeviceService.Release(disposing);
+                _graphicsDeviceService = null;
             }
 
             base.Dispose(disposing);
@@ -92,46 +92,46 @@ namespace GaiaPulse.XNA
             {
                 // Draw the control using the GraphicsDevice.
 
-                Timer.Restart();
+                _timer.Restart();
 
                 LogicUpdate();
                 Draw();
                 EndDraw();
 
-                int TimerTime = (int)Timer.ElapsedMilliseconds;
+                int timerTime = (int)_timer.ElapsedMilliseconds;
 
-                float TimeTaken = TimerTime;
+                float timeTaken = timerTime;
 
-                CurrentDraws++;
+                _currentDraws++;
 
                 float TargetTime = 1000 / FPS;
 
-                CurrentMilliseconds += TimeTaken;
+                _currentMilliseconds += timeTaken;
 
-                while (CurrentMilliseconds >= 1000)
+                while (_currentMilliseconds >= 1000)
                 {
-                    CurrentMilliseconds -= 1000;
-                    CurrentFPS = CurrentDraws;
-                    CurrentDraws = 0;
+                    _currentMilliseconds -= 1000;
+                    CurrentFPS = _currentDraws;
+                    _currentDraws = 0;
                 }
 
-                float SleepTime = TargetTime - TimeTaken + .75f;
+                float sleepTime = TargetTime - timeTaken + .75f;
 
-                if (SleepTime > 0)
+                if (sleepTime > 0)
                 {
-                    CurrentMilliseconds += SleepTime;
+                    _currentMilliseconds += sleepTime;
                 }
 
-                if (CurrentMilliseconds >= 1000)
+                if (_currentMilliseconds >= 1000)
                 {
-                    CurrentMilliseconds -= 1000;
-                    CurrentFPS = CurrentDraws;
-                    CurrentDraws = 0;
+                    _currentMilliseconds -= 1000;
+                    CurrentFPS = _currentDraws;
+                    _currentDraws = 0;
                 }
 
-                if ((int)SleepTime > 0)
+                if ((int)sleepTime > 0)
                 {
-                    Thread.Sleep((int)SleepTime);
+                    Thread.Sleep((int)sleepTime);
                 }
             }
             else
@@ -150,7 +150,7 @@ namespace GaiaPulse.XNA
         private string BeginDraw()
         {
             // If we have no graphics device, we must be running in the designer.
-            if (graphicsDeviceService == null)
+            if (_graphicsDeviceService == null)
             {
                 return Text + "\n\n" + GetType();
             }
@@ -240,7 +240,7 @@ namespace GaiaPulse.XNA
             {
                 try
                 {
-                    graphicsDeviceService.ResetDevice(ClientSize.Width, ClientSize.Height);
+                    _graphicsDeviceService.ResetDevice(ClientSize.Width, ClientSize.Height);
                 }
                 catch (Exception e)
                 {

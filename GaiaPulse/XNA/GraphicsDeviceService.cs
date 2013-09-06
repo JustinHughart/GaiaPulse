@@ -8,51 +8,51 @@ namespace GaiaPulse.XNA
 {
     internal class GraphicsDeviceService : IGraphicsDeviceService
     {
-        static GraphicsDeviceService SingletonInstance;
+        static GraphicsDeviceService _singletonInstance;
 
-        static int ReferenceCount;
+        static int _referenceCount;
 
-        PresentationParameters parameters;
+        PresentationParameters _parameters;
 
         public GraphicsDevice GraphicsDevice
         {
-            get { return graphicsdevice; }
+            get { return _graphicsdevice; }
         }
 
-        GraphicsDevice graphicsdevice;
+        GraphicsDevice _graphicsdevice;
 
         public event EventHandler<EventArgs> DeviceCreated;
         public event EventHandler<EventArgs> DeviceDisposing;
         public event EventHandler<EventArgs> DeviceReset;
         public event EventHandler<EventArgs> DeviceResetting;
 
-        private GraphicsDeviceService(IntPtr WindowHandle, int Width, int Height)
+        private GraphicsDeviceService(IntPtr windowHandle, int width, int height)
         {
-            parameters = new PresentationParameters();
-            parameters.BackBufferWidth = Math.Max(Width, 1);
-            parameters.BackBufferHeight = Math.Max(Height, 1);
-            parameters.BackBufferFormat = SurfaceFormat.Color;
-            parameters.DepthStencilFormat = DepthFormat.Depth24;
-            parameters.DeviceWindowHandle = WindowHandle;
-            parameters.PresentationInterval = PresentInterval.Immediate;
-            parameters.IsFullScreen = false;
+            _parameters = new PresentationParameters();
+            _parameters.BackBufferWidth = Math.Max(width, 1);
+            _parameters.BackBufferHeight = Math.Max(height, 1);
+            _parameters.BackBufferFormat = SurfaceFormat.Color;
+            _parameters.DepthStencilFormat = DepthFormat.Depth24;
+            _parameters.DeviceWindowHandle = windowHandle;
+            _parameters.PresentationInterval = PresentInterval.Immediate;
+            _parameters.IsFullScreen = false;
 
-            graphicsdevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.Reach, parameters);
+            _graphicsdevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.Reach, _parameters);
         }
 
-        public static GraphicsDeviceService AddRef(IntPtr WindowHandle, int Width, int Height)
+        public static GraphicsDeviceService AddRef(IntPtr windowHandle, int width, int height)
         {
-            if (Interlocked.Increment(ref ReferenceCount) == 1)
+            if (Interlocked.Increment(ref _referenceCount) == 1)
             {
-                SingletonInstance = new GraphicsDeviceService(WindowHandle, Width, Height);
+                _singletonInstance = new GraphicsDeviceService(windowHandle, width, height);
             }
 
-            return SingletonInstance;
+            return _singletonInstance;
         }
 
         public void Release(bool disposing)
         {
-            if (Interlocked.Decrement(ref ReferenceCount) == 0)
+            if (Interlocked.Decrement(ref _referenceCount) == 0)
             {
                 if (disposing)
                 {
@@ -62,19 +62,19 @@ namespace GaiaPulse.XNA
                     GraphicsDevice.Dispose();
                 }
 
-                graphicsdevice = null;
+                _graphicsdevice = null;
             }
         }
 
-        public void ResetDevice(int Width, int Height)
+        public void ResetDevice(int width, int height)
         {
             if (DeviceResetting != null)
                 DeviceResetting(this, EventArgs.Empty);
 
-            parameters.BackBufferWidth = Math.Max(parameters.BackBufferWidth, Width);
-            parameters.BackBufferHeight = Math.Max(parameters.BackBufferHeight, Height);
+            _parameters.BackBufferWidth = Math.Max(_parameters.BackBufferWidth, width);
+            _parameters.BackBufferHeight = Math.Max(_parameters.BackBufferHeight, height);
 
-            graphicsdevice.Reset(parameters);
+            _graphicsdevice.Reset(_parameters);
 
             if (DeviceReset != null)
                 DeviceReset(this, EventArgs.Empty);
