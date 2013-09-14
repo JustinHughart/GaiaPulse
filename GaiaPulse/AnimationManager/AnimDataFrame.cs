@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using GaiaPulse.SC.FBFAnimation;
+using GaiaPulse.SC.FrameAnimation;
 
 namespace GaiaPulse.AnimationManager
 {

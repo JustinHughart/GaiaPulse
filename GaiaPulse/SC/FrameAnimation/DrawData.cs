@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GaiaPulse.SC.FBFAnimation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

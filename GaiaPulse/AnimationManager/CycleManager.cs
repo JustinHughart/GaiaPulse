@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GaiaPulse.SC.FBFAnimation;
 using GaiaPulse.SC.FrameAnimation;
 using Microsoft.Xna.Framework;
 

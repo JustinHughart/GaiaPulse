@@ -1,3 +1,0 @@
--Added tree view to EntryForm.
--Directory creation and deletion added.
--Character creation updated to work with the tree.

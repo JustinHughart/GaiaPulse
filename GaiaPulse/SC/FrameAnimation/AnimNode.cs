@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GaiaPulse.SC.FBFAnimation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,7 +8,7 @@ namespace GaiaPulse.SC.FrameAnimation
     public class AnimNode //The node that holds all the frame data.
     {
         //Owner
-        FBFAnimation.FrameAnimation _owner;
+        FrameAnimation _owner;
 
         //Animation Data
         public DrawData DrawData { get; private set; } //The draw data
@@ -27,7 +26,7 @@ namespace GaiaPulse.SC.FrameAnimation
         //List of tags
         Dictionary<string, string> _tags;
 
-        public AnimNode(FBFAnimation.FrameAnimation owner, int timeTillNext) //Constructor
+        public AnimNode(FrameAnimation owner, int timeTillNext) //Constructor
         {
             _owner = owner;
             TimeTillNext = timeTillNext;

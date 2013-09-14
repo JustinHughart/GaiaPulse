@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using GaiaPulse.SC.FrameAnimation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GaiaPulse.SC.FBFAnimation
+namespace GaiaPulse.SC.FrameAnimation
 {
     public class FrameAnimation : AnimBase
     {
@@ -326,7 +325,6 @@ namespace GaiaPulse.SC.FBFAnimation
                             Rectangle hbrect = Rectangle.Empty;
                             int hbleftoffset = 0;
                             BoundingType hbtype = BoundingType.Body;
-                            DamageProfile hbdamage = null;
                             
                             var hbidattrib = hitbox.Attribute("group");
 
@@ -393,70 +391,8 @@ namespace GaiaPulse.SC.FBFAnimation
                                 BoundingType.TryParse(hbtypeattrib.Value, out hbtype);
                             }
 
-                            //Damage Profile
-
-                            var hbdamageelement = hitbox.Element("damageprofile");
-
-                            if (hbdamageelement != null)
-                            {
-                                hbdamage = new DamageProfile();
-                                float atk = 0;
-                                float phys = 0;
-                                float mag = 0;
-                                float vari = 0;
-
-                                var hbatkattrib = hbdamageelement.Attribute("attack");
-
-                                if (hbatkattrib != null)
-                                {
-                                    atk = float.Parse(hbatkattrib.Value);
-                                }
-
-                                var hbphysattrib = hbdamageelement.Attribute("physical");
-
-                                if (hbphysattrib != null)
-                                {
-                                    phys = float.Parse(hbphysattrib.Value);
-                                }
-
-                                var hbmagattrib = hbdamageelement.Attribute("magical");
-
-                                if (hbmagattrib != null)
-                                {
-                                    mag = float.Parse(hbmagattrib.Value);
-                                }
-
-                                var hbvariattrib = hbdamageelement.Attribute("variance");
-
-                                if (hbvariattrib != null)
-                                {
-                                    vari = float.Parse(hbvariattrib.Value);
-                                }
-
-                                hbdamage.SetData(atk, phys, mag, vari);
-
-                                foreach (var damageattrib in hbdamageelement.Attributes())
-                                {
-                                    switch (damageattrib.Name.ToString())
-                                    {
-                                        case "attack":
-                                            break;
-                                        case "physical":
-                                            break;
-                                        case "magical":
-                                            break;
-                                        case "variance":
-                                            break;
-                                        default:
-                                            hbdamage.AddDamage(damageattrib.Name.ToString(), float.Parse(damageattrib.Value));
-                                            break;
-                                    }
-                                }
-                            }
-
                             BoundBox box = new BoundBox(hbrect, hbleftoffset, hbtype);
                             box.SetGroup(hbid);
-                            box.SetDamageProfile(hbdamage);
                             drawdata.AddBoundingBox(box);
                         }
                     }
@@ -564,47 +500,6 @@ namespace GaiaPulse.SC.FBFAnimation
                          }
 
                          animnode.SetRotation(radians, smoothrot);
-                     }
-
-                     //Sound
-
-                     var soundelement = node.Element("sound");
-
-                     if (soundelement != null)
-                     {
-                         string soundid = "";
-
-                         var soundidattrib =  soundelement.Attribute("id");
-
-                         if (soundidattrib != null)
-                         {
-                             animnode.SetSound(soundid);
-                         }
-                     }
-
-                     //Hitspark
-                     var hitsparkelement = node.Element("hitspark");
-
-                     if (hitsparkelement != null)
-                     {
-                         string hitsparkgraphic = "";
-                         string hitsparksound = "";
-
-                         var graphicattrib = hitsparkelement.Attribute("graphic");
-
-                         if (graphicattrib != null)
-                         {
-                             hitsparkgraphic = graphicattrib.Value;
-                         }
-
-                         var soundattrib = hitsparkelement.Attribute("sound");
-
-                         if (soundattrib != null)
-                         {
-                             hitsparksound = soundattrib.Value;
-                         }
-
-                         animnode.SetHitspark(hitsparkgraphic, hitsparksound);
                      }
 
                      //Tags

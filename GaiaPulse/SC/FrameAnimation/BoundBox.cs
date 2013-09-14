@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace GaiaPulse.SC.FBFAnimation
+namespace GaiaPulse.SC.FrameAnimation
 {
     public enum BoundingType
     {

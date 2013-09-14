@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using GaiaPulse.AnimationManager.EditorData;
 using GaiaPulse.SC;
-using GaiaPulse.SC.FBFAnimation;
 using GaiaPulse.SC.FrameAnimation;
 using GaiaPulse.XNA;
 using Microsoft.Xna.Framework;
@@ -259,7 +258,7 @@ namespace GaiaPulse.AnimationManager
 
                     if (box != null)
                     {
-                        boxdata = "Group ID: " + box.Group + "Rect: " + box.Rect.ToString() + ", Left Offset: " + box.LeftOffset + ", Type: " + box.BoundType + ", Damage Profile: " + (box.Damage != null);
+                        boxdata = "Group ID: " + box.Group + "Rect: " + box.Rect.ToString() + ", Left Offset: " + box.LeftOffset + ", Type: " + box.BoundType;
                     }
                     
                     _spritebatch.DrawString(_font, "Current Hitbox: " + _currhitbox + " Number of Hitboxes: " + CurrFrame().GetBoxes().Count, new Vector2(0, numlines * 32), Color.White);
@@ -553,42 +552,6 @@ namespace GaiaPulse.AnimationManager
 
                         hitbox.Add(new XAttribute("boundingtype", box.BoundType));
 
-                        //Set Damage Profile
-
-                        if (box.BoundType == BoundingType.Attack && box.Damage != null)
-                        {
-                            DamageProfile damage = box.Damage;
-
-                            XElement damageprofile = new XElement("damageprofile");
-
-                            if (damage.AttackMod != 0)
-                            {
-                                damageprofile.Add(new XAttribute("attack", damage.AttackMod));
-                            }
-
-                            if (damage.PhysMod != 0)
-                            {
-                                damageprofile.Add(new XAttribute("physical", damage.PhysMod));
-                            }
-
-                            if (damage.MagicMod != 0)
-                            {
-                                damageprofile.Add(new XAttribute("magical", damage.MagicMod));
-                            }
-
-                            if (damage.Variance != 0)
-                            {
-                                damageprofile.Add(new XAttribute("variance", damage.Variance));
-                            }
-
-                            foreach (var dmg in damage.Damages)
-                            {
-                                damageprofile.Add(new XAttribute(dmg.Key, dmg.Value));
-                            }
-
-                            hitbox.Add(damageprofile);
-                        }
-
                         hitboxes.Add(hitbox);
                     }
 
@@ -654,30 +617,7 @@ namespace GaiaPulse.AnimationManager
 
                         node.Add(rotation);
                     }
-
-                    //Set Sound
-
-                    if (animnode.SoundID != "")
-                    {
-                        XElement sound = new XElement("sound");
-
-                        sound.Add(new XAttribute("id", animnode.SoundID));
-
-                        node.Add(sound);
-                    }
-
-                    //Set Hitspark
-
-                    if (animnode.HitsparkGraphic != "" && animnode.HitsparkSound != "")
-                    {
-                        XElement hitspark = new XElement("hitspark");
-
-                        hitspark.Add(new XAttribute("graphic", animnode.HitsparkGraphic));
-                        hitspark.Add(new XAttribute("sound", animnode.HitsparkSound));
-
-                        node.Add(hitspark);
-                    }
-
+                    
                     //Set Tags
 
                     Dictionary<String, String> tags = animnode.GetTags();
@@ -844,7 +784,7 @@ namespace GaiaPulse.AnimationManager
                 drawarea.Height = Math.Min(2048, drawarea.Height + rate);
             }
 
-            CurrFrame().SetDrawArea(drawarea);
+            CurrFrame().DrawArea = drawarea;
         }
 
         private void CheckOriginKeys()
@@ -878,7 +818,7 @@ namespace GaiaPulse.AnimationManager
                 origin.Y = Math.Min(2048, origin.Y + rate);
             }
 
-            CurrFrame().SetOrigin(origin);
+            CurrFrame().Origin = origin;
         }
 
         public void CheckOffsetKeys()
@@ -926,7 +866,7 @@ namespace GaiaPulse.AnimationManager
                 offsets.Y += rate;
             }
 
-            CurrFrame().SetOffsets(offsets);
+            CurrFrame().Offsets = offsets;
         }
 
         private void CheckHitboxKeys()
@@ -1034,12 +974,6 @@ namespace GaiaPulse.AnimationManager
                             type = BoundingType.Body;
                             break;
                     }
-                }
-
-                if (_input.IsKeyPressed(Keys.F))
-                {
-                    DamageProfileFrame dpf = new DamageProfileFrame(box);
-                    dpf.Show();
                 }
 
                 if (_input.IsKeyPressed(Keys.G))

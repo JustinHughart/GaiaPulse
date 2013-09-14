@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 
@@ -15,9 +17,11 @@ namespace GaiaPulse.AnimationManager
             
             AnimPath = "";
 
-            TexturePath = "textures/";
+            TexturePath = "Textures";
             
             Editor.SetWinForm(this);
+
+            CheckTextureFolder();
         }
 
         private void AssignTextureToolStripMenuItemClick(object sender, EventArgs e)
@@ -65,6 +69,19 @@ namespace GaiaPulse.AnimationManager
             Editor.SaveAnim();
             CycleManager cm = new CycleManager(Editor, Editor.Anim);
             cm.Show();
+        }
+
+        private void TexturesToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            Process.Start(TexturePath);
+        }
+
+        private void CheckTextureFolder()
+        {
+            if (!Directory.Exists(TexturePath))
+            {
+                Directory.CreateDirectory(TexturePath);
+            }
         }
     }
 }

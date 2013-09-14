@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GaiaPulse.SC.FBFAnimation;
 using GaiaPulse.SC.FrameAnimation;
 using Microsoft.Xna.Framework;
 
@@ -93,11 +92,6 @@ namespace GaiaPulse.AnimationManager
             txtRotation.Text = _node.Rotation.ToString();
             chkSmoothRotation.Checked = _node.SmoothRotation;
 
-            txtSound.Text = _node.SoundID;
-
-            txtHitsparkGraphic.Text = _node.HitsparkGraphic;
-            txtHitsparkSound.Text = _node.HitsparkSound;
-
             txtTimeTillNext.Text = _node.TimeTillNext.ToString();
 
             LoadTags();
@@ -107,8 +101,6 @@ namespace GaiaPulse.AnimationManager
         {
             _node.SetVelocity(new Vector2(float.Parse(txtVelocityX.Text), float.Parse(txtVelocityY.Text)), chkSmoothX.Checked, chkSmoothY.Checked);
             _node.SetRotation(float.Parse(txtRotation.Text), chkSmoothRotation.Checked);
-            _node.SetSound(txtSound.Text);
-            _node.SetHitspark(txtHitsparkGraphic.Text, txtHitsparkSound.Text);
             _node.SetTTN(int.Parse(txtTimeTillNext.Text));
 
             SaveTags();

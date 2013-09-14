@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GaiaPulse.SC.FBFAnimation;
 using GaiaPulse.SC.FrameAnimation;
 using Microsoft.Xna.Framework;
 
@@ -41,11 +40,11 @@ namespace GaiaPulse.AnimationManager
 
         private void BtnSaveClick(object sender, EventArgs e)
         {
-            _drawdata.SetID(txtID.Text);
-            _drawdata.SetTexture(txtTexture.Text);
-            _drawdata.SetDrawArea(new Rectangle(int.Parse(txtDrawX.Text), int.Parse(txtDrawY.Text), int.Parse(txtDrawW.Text), int.Parse(txtDrawH.Text)));
-            _drawdata.SetOffsets(new Vector3(float.Parse(txtXOffR.Text),float.Parse(txtYOff.Text), float.Parse(txtXOffL.Text)));
-            _drawdata.SetOrigin(new Vector2(float.Parse(txtOriginX.Text), float.Parse(txtOriginY.Text)));
+            _drawdata.ID = txtID.Text;
+            _drawdata.TextureName = txtTexture.Text;
+            _drawdata.DrawArea = new Rectangle(int.Parse(txtDrawX.Text), int.Parse(txtDrawY.Text), int.Parse(txtDrawW.Text), int.Parse(txtDrawH.Text));
+            _drawdata.Offsets = new Vector3(float.Parse(txtXOffR.Text),float.Parse(txtYOff.Text), float.Parse(txtXOffL.Text));
+            _drawdata.Origin = new Vector2(float.Parse(txtOriginX.Text), float.Parse(txtOriginY.Text));
 
             this.Close();
         }

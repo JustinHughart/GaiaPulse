@@ -39,8 +39,9 @@
             this.framesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Editor = new GaiaPulse.AnimationManager.EditorControl();
             this.cycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Editor = new GaiaPulse.AnimationManager.EditorControl();
+            this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +51,8 @@
             this.saveToolStripMenuItem,
             this.editToolStripMenuItem,
             this.framesToolStripMenuItem,
-            this.cycleToolStripMenuItem});
+            this.cycleToolStripMenuItem,
+            this.texturesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(535, 24);
@@ -69,14 +71,14 @@
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.SaveToolStripMenuItem1Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
@@ -121,16 +123,23 @@
             // addFrameToolStripMenuItem
             // 
             this.addFrameToolStripMenuItem.Name = "addFrameToolStripMenuItem";
-            this.addFrameToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.addFrameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addFrameToolStripMenuItem.Text = "Add Frame";
             this.addFrameToolStripMenuItem.Click += new System.EventHandler(this.AddFrameToolStripMenuItemClick);
             // 
             // deleteFrameToolStripMenuItem
             // 
             this.deleteFrameToolStripMenuItem.Name = "deleteFrameToolStripMenuItem";
-            this.deleteFrameToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.deleteFrameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteFrameToolStripMenuItem.Text = "Delete Frame";
             this.deleteFrameToolStripMenuItem.Click += new System.EventHandler(this.DeleteFrameToolStripMenuItemClick);
+            // 
+            // cycleToolStripMenuItem
+            // 
+            this.cycleToolStripMenuItem.Name = "cycleToolStripMenuItem";
+            this.cycleToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.cycleToolStripMenuItem.Text = "Cycle";
+            this.cycleToolStripMenuItem.Click += new System.EventHandler(this.CycleToolStripMenuItemClick);
             // 
             // Editor
             // 
@@ -143,12 +152,12 @@
             this.Editor.TabIndex = 1;
             this.Editor.Text = "Editor";
             // 
-            // cycleToolStripMenuItem
+            // texturesToolStripMenuItem
             // 
-            this.cycleToolStripMenuItem.Name = "cycleToolStripMenuItem";
-            this.cycleToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.cycleToolStripMenuItem.Text = "Cycle";
-            this.cycleToolStripMenuItem.Click += new System.EventHandler(this.CycleToolStripMenuItemClick);
+            this.texturesToolStripMenuItem.Name = "texturesToolStripMenuItem";
+            this.texturesToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.texturesToolStripMenuItem.Text = "Textures";
+            this.texturesToolStripMenuItem.Click += new System.EventHandler(this.TexturesToolStripMenuItemClick);
             // 
             // AnimationEditor
             // 
@@ -183,5 +192,6 @@
         private System.Windows.Forms.ToolStripMenuItem deleteFrameToolStripMenuItem;
         private EditorControl Editor;
         private System.Windows.Forms.ToolStripMenuItem cycleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem texturesToolStripMenuItem;
     }
 }
