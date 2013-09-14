@@ -16,6 +16,17 @@ namespace GaiaPulse.SC.FrameAnimation
         public String Name;
 
         /// <summary>
+        /// The default texture used for adding new frames.
+        /// </summary>
+        public String DefaultTexture;
+
+        public AnimBase()
+        {
+            Name = "";
+            DefaultTexture = "";
+        }
+
+        /// <summary>
         /// Updates the animation
         /// </summary>
         /// <param name="animSpeed">The rate at which to update.</param>

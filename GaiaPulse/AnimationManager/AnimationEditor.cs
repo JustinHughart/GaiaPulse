@@ -1,23 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using GaiaPulse.SC.FrameAnimation;
 using Microsoft.Xna.Framework;
 
 namespace GaiaPulse.AnimationManager
 {
     public partial class AnimationEditor : Form
     {
-        public String AnimPath { get; private set; }
-        public String TexturePath { get; private set; }
+        public String SavePath;
 
         public AnimationEditor()
         {
             InitializeComponent();
-            
-            AnimPath = "";
+         
+            SavePath = "";
 
-            TexturePath = "Textures";
+            SavePath = "New Animation";
+
+            this.Text = "Gaia Pulse Animation Editor - " + SavePath + " -";
             
             Editor.SetWinForm(this);
 
@@ -45,7 +48,7 @@ namespace GaiaPulse.AnimationManager
         {
             if (Editor.Frames.Count > 0)
             {
-                NodeDataFrame ndf = new NodeDataFrame(Editor.CurrFrame());
+                NodeDataFrame ndf = new NodeDataFrame(Editor.CurrFrame(), Editor.CurrFrameNumber());
                 ndf.Show();
             }
             else
@@ -66,21 +69,39 @@ namespace GaiaPulse.AnimationManager
 
         private void CycleToolStripMenuItemClick(object sender, EventArgs e)
         {
-            Editor.SaveAnim();
+            Dictionary<String, DrawData> dd = new Dictionary<string, DrawData>();
+
+            foreach (var fbf in Editor.Frames)
+            {
+                dd.Add(fbf.ID, fbf);
+            }
+
+            Editor.Anim.SetDrawDatas(dd);
+
             CycleManager cm = new CycleManager(Editor, Editor.Anim);
             cm.Show();
         }
 
         private void TexturesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            Process.Start(TexturePath);
+            Process.Start(Program.TexturePath);
         }
 
         private void CheckTextureFolder()
         {
-            if (!Directory.Exists(TexturePath))
+            if (!Directory.Exists(Program.TexturePath))
             {
-                Directory.CreateDirectory(TexturePath);
+                Directory.CreateDirectory(Program.TexturePath);
+            }
+        }
+        
+        private void NewToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to start anew?", "Making a new file", MessageBoxButtons.OKCancel);
+
+            if (result == DialogResult.OK)
+            {
+                Editor.NewAnimation();
             }
         }
     }

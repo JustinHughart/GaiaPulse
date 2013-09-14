@@ -36,7 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnPlaceholder = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstFrames
@@ -113,21 +113,22 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSaveClick);
             // 
-            // btnPlaceholder
+            // btnCancel
             // 
-            this.btnPlaceholder.Location = new System.Drawing.Point(343, 265);
-            this.btnPlaceholder.Name = "btnPlaceholder";
-            this.btnPlaceholder.Size = new System.Drawing.Size(75, 23);
-            this.btnPlaceholder.TabIndex = 8;
-            this.btnPlaceholder.Text = "Placeholder";
-            this.btnPlaceholder.UseVisualStyleBackColor = true;
+            this.btnCancel.Location = new System.Drawing.Point(343, 265);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 8;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
             // 
             // CycleManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(432, 297);
-            this.Controls.Add(this.btnPlaceholder);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -137,7 +138,7 @@
             this.Controls.Add(this.lstCycle);
             this.Controls.Add(this.lstFrames);
             this.Name = "CycleManager";
-            this.Text = "CycleManager";
+            this.Text = "Cycle Manager";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,6 +154,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnPlaceholder;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

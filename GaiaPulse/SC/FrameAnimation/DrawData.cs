@@ -121,7 +121,7 @@ namespace GaiaPulse.SC.FrameAnimation
         {
             if (TextureName != "")
             {
-                Texture2D tex = TextureManager.GetTexture(TextureName);
+                Texture2D tex = TextureManager.GetTexture(Program.TexturePath + TextureName);
                 tex.Name = TextureName;
                 Texture = tex;
             }

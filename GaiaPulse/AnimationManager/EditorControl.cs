@@ -30,8 +30,6 @@ namespace GaiaPulse.AnimationManager
 
         AnimationEditor _winForm;
 
-        public String AnimPath { get; private set; }
-
         Texture2D _pointTexture;
         Texture2D _lineTexture;
 
@@ -62,8 +60,6 @@ namespace GaiaPulse.AnimationManager
             _spritebatch = new SpriteBatch(GraphicsDevice);
             _font = _content.Load<SpriteFont>("Fonts/Courier New");
             _camera = new Camera();
-
-            AnimPath = _winForm.AnimPath;
             
             _pointTexture = _content.Load<Texture2D>("pixelmarker");
             _lineTexture = _content.Load<Texture2D>("1x1");
@@ -76,16 +72,14 @@ namespace GaiaPulse.AnimationManager
 
             Frames = new List<DrawData>();
 
-            if (AnimPath == "")
+            if (_winForm.SavePath == "New Animation")
             {
-                Anim = new FrameAnimation("bah", false);
+                Anim = new FrameAnimation("", false);
             }
             else
             {
                 LoadAnim();   
             }
-
-            
             
             Application.Idle += delegate { Invalidate(); };
         }
@@ -443,7 +437,7 @@ namespace GaiaPulse.AnimationManager
 
         public void LoadAnim()
         {
-            var animdata = FrameAnimation.LoadFromXML(_winForm.AnimPath);
+            var animdata = FrameAnimation.LoadFromXML(_winForm.SavePath);
 
             _animID = animdata.Item1;
             Anim = animdata.Item2;
@@ -453,7 +447,7 @@ namespace GaiaPulse.AnimationManager
 
         public void SaveAnim()
         {
-            String path = AnimPath;
+            String path = _winForm.SavePath;
 
             Dictionary<String, DrawData> dd = new Dictionary<string, DrawData>();
 
@@ -473,11 +467,6 @@ namespace GaiaPulse.AnimationManager
             if (Anim.IsLooping)
             {
                 anim.Add(new XAttribute("looping", "true"));
-            }
-
-            if (Anim.AutoRotation != 0f)
-            {
-                anim.Add(new XAttribute("autorotation", Anim.AutoRotation));
             }
 
             //Set Frames
@@ -998,7 +987,31 @@ namespace GaiaPulse.AnimationManager
 
         public void AddNewFrame()
         {
-            Frames.Add(new DrawData(Frames.Count.ToString(), "", new Rectangle(0, 0, 2048, 2048), new Vector3(0, 0, 0), Vector2.Zero));
+            int id = Frames.Count;
+
+            bool exit = false;
+
+            while (!exit)
+            {
+                bool changed = false;
+
+                foreach (var drawData in Frames)
+                {
+                    if (drawData.ID == id.ToString())
+                    {
+                        id++;
+                        changed = true;
+                        break;
+                    }
+                }
+
+                if (!changed)
+                {
+                    exit = true;
+                }
+            }
+
+            Frames.Add(new DrawData(id.ToString(), Anim.DefaultTexture, new Rectangle(0, 0, 2048, 2048), new Vector3(0, 0, 0), Vector2.Zero));
         }
 
         public void DeleteCurrFrame()
@@ -1043,6 +1056,11 @@ namespace GaiaPulse.AnimationManager
             return Frames[_currframe];
         }
 
+        public int CurrFrameNumber()
+        {
+            return _currframe;
+        }
+
         public BoundBox CurrHitbox()
         {
             DrawData currframe = CurrFrame();
@@ -1055,6 +1073,15 @@ namespace GaiaPulse.AnimationManager
             {
                 return null;
             }
+        }
+
+        public void NewAnimation()
+        {
+            _winForm.SavePath = "New Animation";
+            TextureManager.Initialize(TextureManager.GFX);
+            Initialize();
+            //Anim = new FrameAnimation("bah", false);
+            //Frames = new List<DrawData>();
         }
     }
 }

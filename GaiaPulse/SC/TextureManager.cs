@@ -29,7 +29,7 @@ namespace GaiaPulse.SC
         /// <summary>
         /// The graphics device, for loading textures.
         /// </summary>
-        static private GraphicsDevice _gfx;
+        static public GraphicsDevice GFX;
 
         /// <summary>
         /// Initializes the texture manager. If texture manager is already initializes, restores the manager to its initial state by clearing and disposing of textures.
@@ -37,7 +37,7 @@ namespace GaiaPulse.SC
         /// <param name="gfx">The graphics device, for loading images.</param>
         static public void Initialize(GraphicsDevice gfx) 
         {
-            _gfx = gfx;
+            GFX = gfx;
 
             //Disposes of any textures before reinitializing.
 
@@ -56,36 +56,31 @@ namespace GaiaPulse.SC
         /// <summary>
         /// Returns a texture. If it doesn't exist, load it. Appends the texture folder to the name to make the ID.
         /// </summary>
-        /// <param name="name">The name of the texture.</param>
+        /// <param name="path">The name of the texture.</param>
         /// <returns></returns>
         /// <exception cref="System.Exception">Texture manager not initialized.</exception>
-        static public Texture2D GetTexture(String name) 
+        static public Texture2D GetTexture(String path) 
         {
-            //Make the ID.
-
-            name = name.Substring(name.LastIndexOf('/') + 1);
-            String id = "TempSprites/" + name;
-
             //Check for proper initialization.
 
             if (Initialized)
             {
                 //Check if the texture manager has the texture already.
 
-                if (_texturedictionary.ContainsKey(name))
+                if (_texturedictionary.ContainsKey(path))
                 {
                     //If it does, return it.
 
-                    return _texturedictionary[name];
+                    return _texturedictionary[path];
                 }
                 else
                 {
                     //If it doesn't, load it.
 
                     Texture2D newTexture = null;
-                    Stream stream = File.OpenRead(name);
+                    Stream stream = File.OpenRead(path);
 
-                    newTexture = Texture2D.FromStream(_gfx, stream);
+                    newTexture = Texture2D.FromStream(GFX, stream);
                     
                     //Get color data, for color keying.
 
@@ -111,13 +106,13 @@ namespace GaiaPulse.SC
                     //Set the data and the name.
 
                     newTexture.SetData(colordata);
-                    newTexture.Name = id;
+                    newTexture.Name = path;
                     
                     //Adds the texture to the dictionary.
 
-                    _texturedictionary.Add(name, newTexture);
+                    _texturedictionary.Add(path, newTexture);
 
-                    return _texturedictionary[name];
+                    return _texturedictionary[path];
                 }
             }
             else

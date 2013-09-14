@@ -9,7 +9,7 @@ namespace GaiaPulse
     /// Used to start the application.
     /// </summary>
     ///
-    public static class Startup
+    public static class Program
     {
         /// <summary>
         /// Gets the application's directory.
@@ -28,12 +28,22 @@ namespace GaiaPulse
         public static String FullPath { get; private set; }
 
         /// <summary>
+        /// Gets the global texture path.
+        /// </summary>
+        /// <value>
+        /// The global texture path.
+        /// </value>
+        public static String TexturePath { get; private set; }
+
+        /// <summary>
         /// Starts the program.
         /// </summary>
         [STAThread]
         private static void Main()
         {
-            AppDir = Path.GetDirectoryName(FullPath = Application.ExecutablePath);
+            FullPath = Application.ExecutablePath;
+            AppDir = Path.GetDirectoryName(FullPath) + "\\";
+            TexturePath = AppDir + "Textures\\";
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

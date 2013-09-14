@@ -75,9 +75,14 @@ namespace GaiaPulse.AnimationManager
         {
             if (lstCycle.SelectedItem != null)
             {
-                NodeProperties np = new NodeProperties((AnimNode)lstCycle.SelectedItem);
+                CycleNodeProperties np = new CycleNodeProperties((AnimNode)lstCycle.SelectedItem, lstCycle.SelectedItem.ToString());
                 np.Show();
             }
+        }
+
+        private void BtnCancelClick(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

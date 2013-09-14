@@ -23,9 +23,7 @@ namespace GaiaPulse.SC.FrameAnimation
         private Vector2 _position;
         private Vector2 _scale;
         private float _rotation;
-
-        public float AutoRotation { get; private set; }
-
+        
         public FrameAnimation(String name, bool looping) //Constructor
         {
             Nodes = new List<AnimNode>();
@@ -45,17 +43,7 @@ namespace GaiaPulse.SC.FrameAnimation
         {
             Name = id;
         }
-
-        public bool IsEmpty() //Returns whether or not the animation is empty.
-        {
-            return Nodes.Count == 0;
-        }
-
-        public bool IsAnimPlaying(String name) //Checks if the anim is playing, by name.
-        {
-            return this.Name == name;
-        }
-
+        
         public void AddNode(AnimNode node) //Adds a node.
         {
             Nodes.Add(node);
@@ -95,15 +83,6 @@ namespace GaiaPulse.SC.FrameAnimation
 
         public override void Draw(SpriteBatch spriteBatch, bool facingRight)
         {
-            if (facingRight)
-            {
-                this._rotation += AutoRotation;
-            }
-            else
-            {
-                this._rotation -= AutoRotation;
-            }
-            
             if (Nodes.Count > 0)
             {
             Nodes[CurrFrame].Draw(spriteBatch, _position, facingRight, _scale, _rotation);
@@ -118,9 +97,7 @@ namespace GaiaPulse.SC.FrameAnimation
             {
                 retanim.AddNode(node);
             }
-
-            retanim.SetAutoRotation(AutoRotation);
-
+            
             return retanim;
         }
 
@@ -134,11 +111,6 @@ namespace GaiaPulse.SC.FrameAnimation
             return CurrFrame;
         }
 
-        public void SetAutoRotation(float newval)
-        {
-            AutoRotation = newval;
-        }
-
         public override List<BoundBox> GetBoundingBoxes()
         {
             return Nodes[CurrFrame].GetBoxes();
@@ -149,8 +121,6 @@ namespace GaiaPulse.SC.FrameAnimation
             CurrFrame = frame;
         }
 
-        
-
         public static Tuple<String, FrameAnimation> LoadFromXML(string filename)
         {
             XDocument doc = XDocument.Load(filename); //Load XML doc.
@@ -159,7 +129,6 @@ namespace GaiaPulse.SC.FrameAnimation
 
             string name = "0";
             bool looping = false;
-            float autorotate = 0;
 
             var nameattrib = doc.Root.Attribute("name");
 
@@ -176,16 +145,8 @@ namespace GaiaPulse.SC.FrameAnimation
                     looping = bool.Parse(loopattrib.Value);
             }
 
-            var autorotateattrib = doc.Root.Attribute("autorotation");
-
-            if (autorotateattrib != null)
-            {
-                autorotate = float.Parse(autorotateattrib.Value);
-            }
-
             FrameAnimation anim = new FrameAnimation(name, looping);
-            anim.SetAutoRotation(autorotate);
-
+            
             //Frames
 
             var frames = doc.Root.Element("frames");

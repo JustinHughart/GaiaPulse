@@ -32,15 +32,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
-            this.txtAutoRotate = new System.Windows.Forms.TextBox();
+            this.txtDefaultTexture = new System.Windows.Forms.TextBox();
             this.chkLooping = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnChooseTexture = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 9);
+            this.label1.Location = new System.Drawing.Point(40, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 0;
@@ -49,7 +51,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 53);
+            this.label2.Location = new System.Drawing.Point(28, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 1;
@@ -58,30 +60,30 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 31);
+            this.label3.Location = new System.Drawing.Point(4, 31);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "AutoRotation: ";
+            this.label3.Text = "Default Texture: ";
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(71, 6);
+            this.txtID.Location = new System.Drawing.Point(88, 6);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(201, 20);
+            this.txtID.Size = new System.Drawing.Size(182, 20);
             this.txtID.TabIndex = 3;
             // 
-            // txtAutoRotate
+            // txtDefaultTexture
             // 
-            this.txtAutoRotate.Location = new System.Drawing.Point(71, 28);
-            this.txtAutoRotate.Name = "txtAutoRotate";
-            this.txtAutoRotate.Size = new System.Drawing.Size(201, 20);
-            this.txtAutoRotate.TabIndex = 4;
+            this.txtDefaultTexture.Location = new System.Drawing.Point(88, 28);
+            this.txtDefaultTexture.Name = "txtDefaultTexture";
+            this.txtDefaultTexture.Size = new System.Drawing.Size(151, 20);
+            this.txtDefaultTexture.TabIndex = 4;
             // 
             // chkLooping
             // 
             this.chkLooping.AutoSize = true;
-            this.chkLooping.Location = new System.Drawing.Point(71, 53);
+            this.chkLooping.Location = new System.Drawing.Point(75, 53);
             this.chkLooping.Name = "chkLooping";
             this.chkLooping.Size = new System.Drawing.Size(15, 14);
             this.chkLooping.TabIndex = 5;
@@ -89,28 +91,50 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(95, 74);
+            this.button1.Location = new System.Drawing.Point(63, 74);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(70, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1Click);
+            this.button1.Click += new System.EventHandler(this.BtnSaveClick);
+            // 
+            // btnChooseTexture
+            // 
+            this.btnChooseTexture.Location = new System.Drawing.Point(245, 26);
+            this.btnChooseTexture.Name = "btnChooseTexture";
+            this.btnChooseTexture.Size = new System.Drawing.Size(25, 23);
+            this.btnChooseTexture.TabIndex = 7;
+            this.btnChooseTexture.Text = "...";
+            this.btnChooseTexture.UseVisualStyleBackColor = true;
+            this.btnChooseTexture.Click += new System.EventHandler(this.BtnChooseTextureClick);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(154, 74);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(70, 23);
+            this.btnCancel.TabIndex = 8;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
             // 
             // AnimDataFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(278, 106);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnChooseTexture);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.chkLooping);
-            this.Controls.Add(this.txtAutoRotate);
+            this.Controls.Add(this.txtDefaultTexture);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AnimDataFrame";
-            this.Text = "AnimDataFrame";
+            this.Text = "Animation Data";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,8 +146,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtID;
-        private System.Windows.Forms.TextBox txtAutoRotate;
+        private System.Windows.Forms.TextBox txtDefaultTexture;
         private System.Windows.Forms.CheckBox chkLooping;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnChooseTexture;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

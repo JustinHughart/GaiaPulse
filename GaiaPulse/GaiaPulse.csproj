@@ -68,7 +68,7 @@
     <ManifestKeyFile>GaiaPulse_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -106,6 +106,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnimationManager\AnimationEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationManager\AnimationEditor.Designer.cs">
+      <DependentUpon>AnimationEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="AnimationManager\AnimDataFrame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,21 +130,15 @@
     <Compile Include="AnimationManager\NodeDataFrame.Designer.cs">
       <DependentUpon>NodeDataFrame.cs</DependentUpon>
     </Compile>
-    <Compile Include="AnimationManager\NodeProperties.cs">
+    <Compile Include="AnimationManager\CycleNodeProperties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AnimationManager\NodeProperties.Designer.cs">
-      <DependentUpon>NodeProperties.cs</DependentUpon>
+    <Compile Include="AnimationManager\CycleNodeProperties.Designer.cs">
+      <DependentUpon>CycleNodeProperties.cs</DependentUpon>
     </Compile>
-    <Compile Include="Startup.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="AnimationManager\EditorData\Camera.cs" />
     <Compile Include="AnimationManager\EditorData\Input.cs" />
-    <Compile Include="AnimationManager\AnimationEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AnimationManager\AnimationEditor.Designer.cs">
-      <DependentUpon>AnimationEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="AnimationManager\EditorControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -155,6 +155,10 @@
     <Compile Include="XNA\GraphicsDeviceService.cs" />
     <Compile Include="XNA\ServiceContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AnimationManager\AnimationEditor.resx">
+      <DependentUpon>AnimationEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="AnimationManager\AnimDataFrame.resx">
       <DependentUpon>AnimDataFrame.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,12 +168,8 @@
     <EmbeddedResource Include="AnimationManager\NodeDataFrame.resx">
       <DependentUpon>NodeDataFrame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AnimationManager\NodeProperties.resx">
-      <DependentUpon>NodeProperties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AnimationManager\AnimationEditor.resx">
-      <DependentUpon>AnimationEditor.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="AnimationManager\CycleNodeProperties.resx">
+      <DependentUpon>CycleNodeProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -181,7 +181,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

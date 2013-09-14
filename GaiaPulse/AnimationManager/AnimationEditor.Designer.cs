@@ -30,8 +30,9 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.msNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.msSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.msExit = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.assignTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,8 +41,8 @@
             this.addFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Editor = new GaiaPulse.AnimationManager.EditorControl();
             this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Editor = new GaiaPulse.AnimationManager.EditorControl();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,25 +63,33 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem1,
-            this.exitToolStripMenuItem});
+            this.msNew,
+            this.msSave,
+            this.msExit});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.saveToolStripMenuItem.Text = "File";
             // 
-            // saveToolStripMenuItem1
+            // msNew
             // 
-            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.saveToolStripMenuItem1.Text = "Save";
-            this.saveToolStripMenuItem1.Click += new System.EventHandler(this.SaveToolStripMenuItem1Click);
+            this.msNew.Name = "msNew";
+            this.msNew.Size = new System.Drawing.Size(98, 22);
+            this.msNew.Text = "New";
+            this.msNew.Click += new System.EventHandler(this.NewToolStripMenuItemClick);
             // 
-            // exitToolStripMenuItem
+            // msSave
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
+            this.msSave.Name = "msSave";
+            this.msSave.Size = new System.Drawing.Size(98, 22);
+            this.msSave.Text = "Save";
+            this.msSave.Click += new System.EventHandler(this.SaveToolStripMenuItem1Click);
+            // 
+            // msExit
+            // 
+            this.msExit.Name = "msExit";
+            this.msExit.Size = new System.Drawing.Size(98, 22);
+            this.msExit.Text = "Exit";
+            this.msExit.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
             // editToolStripMenuItem
             // 
@@ -123,14 +132,14 @@
             // addFrameToolStripMenuItem
             // 
             this.addFrameToolStripMenuItem.Name = "addFrameToolStripMenuItem";
-            this.addFrameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addFrameToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.addFrameToolStripMenuItem.Text = "Add Frame";
             this.addFrameToolStripMenuItem.Click += new System.EventHandler(this.AddFrameToolStripMenuItemClick);
             // 
             // deleteFrameToolStripMenuItem
             // 
             this.deleteFrameToolStripMenuItem.Name = "deleteFrameToolStripMenuItem";
-            this.deleteFrameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteFrameToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.deleteFrameToolStripMenuItem.Text = "Delete Frame";
             this.deleteFrameToolStripMenuItem.Click += new System.EventHandler(this.DeleteFrameToolStripMenuItemClick);
             // 
@@ -141,6 +150,13 @@
             this.cycleToolStripMenuItem.Text = "Cycle";
             this.cycleToolStripMenuItem.Click += new System.EventHandler(this.CycleToolStripMenuItemClick);
             // 
+            // texturesToolStripMenuItem
+            // 
+            this.texturesToolStripMenuItem.Name = "texturesToolStripMenuItem";
+            this.texturesToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.texturesToolStripMenuItem.Text = "Textures";
+            this.texturesToolStripMenuItem.Click += new System.EventHandler(this.TexturesToolStripMenuItemClick);
+            // 
             // Editor
             // 
             this.Editor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -148,16 +164,9 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.Editor.Location = new System.Drawing.Point(0, 28);
             this.Editor.Name = "Editor";
-            this.Editor.Size = new System.Drawing.Size(535, 326);
+            this.Editor.Size = new System.Drawing.Size(535, 325);
             this.Editor.TabIndex = 1;
-            this.Editor.Text = "Editor";
-            // 
-            // texturesToolStripMenuItem
-            // 
-            this.texturesToolStripMenuItem.Name = "texturesToolStripMenuItem";
-            this.texturesToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.texturesToolStripMenuItem.Text = "Textures";
-            this.texturesToolStripMenuItem.Click += new System.EventHandler(this.TexturesToolStripMenuItemClick);
+            this.Editor.Text = "editor";
             // 
             // AnimationEditor
             // 
@@ -168,7 +177,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "AnimationEditor";
-            this.Text = "PartEditor";
+            this.Text = "Gaia Pulse Animation Editor ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -182,16 +191,17 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem msSave;
+        private System.Windows.Forms.ToolStripMenuItem msExit;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem assignTextureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem frameDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem framesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addFrameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteFrameToolStripMenuItem;
-        private EditorControl Editor;
         private System.Windows.Forms.ToolStripMenuItem cycleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem texturesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem msNew;
+        private EditorControl Editor;
     }
 }

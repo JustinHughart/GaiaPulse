@@ -11,16 +11,17 @@ using Microsoft.Xna.Framework;
 
 namespace GaiaPulse.AnimationManager
 {
-    public partial class NodeProperties : Form
+    public partial class CycleNodeProperties : Form
     {
         private AnimNode _node;
 
         Dictionary<String, String> _dict;
 
-        public NodeProperties(AnimNode node)
+        public CycleNodeProperties(AnimNode node, String id)
         {
             InitializeComponent();
-            
+
+            Text = "Cycle Node Properties: " + id;
             
             _node = node;
 

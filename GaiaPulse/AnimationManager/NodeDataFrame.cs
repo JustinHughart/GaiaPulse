@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -14,9 +15,11 @@ namespace GaiaPulse.AnimationManager
     {
         DrawData _drawdata;
         
-        public NodeDataFrame(DrawData drawdata)
+        public NodeDataFrame(DrawData drawdata, int framenumber)
         {
             InitializeComponent();
+
+            Text = "Node " + framenumber + " Data";
 
             _drawdata = drawdata;
 
@@ -47,6 +50,36 @@ namespace GaiaPulse.AnimationManager
             _drawdata.Origin = new Vector2(float.Parse(txtOriginX.Text), float.Parse(txtOriginY.Text));
 
             this.Close();
+        }
+
+        private void BtnCancelClick(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BtnTextureClick(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = Program.TexturePath;
+            ofd.RestoreDirectory = false;
+            ofd.Multiselect = false;
+            ofd.Filter = "Portable Network Graphics | *.png";
+            ofd.ValidateNames = true;
+
+            ofd.ShowDialog();
+
+            if (ofd.FileName != "")
+            {
+                if (ofd.CheckFileExists)
+                {
+                    String filepath = ofd.FileName;
+
+                    Uri uri1 = new Uri(Program.TexturePath);
+                    Uri uri2 = new Uri(filepath);
+
+                    txtTexture.Text = uri1.MakeRelativeUri(uri2).ToString();
+                }
+            }
         }
 
     }
