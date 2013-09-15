@@ -44,6 +44,10 @@
             this.txtTimeTillNext = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.treeXML = new System.Windows.Forms.TreeView();
+            this.btnCamera = new System.Windows.Forms.Button();
+            this.btnAddNew = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -117,7 +121,7 @@
             // chkSmoothRotation
             // 
             this.chkSmoothRotation.AutoSize = true;
-            this.chkSmoothRotation.Location = new System.Drawing.Point(278, 35);
+            this.chkSmoothRotation.Location = new System.Drawing.Point(317, 35);
             this.chkSmoothRotation.Name = "chkSmoothRotation";
             this.chkSmoothRotation.Size = new System.Drawing.Size(15, 14);
             this.chkSmoothRotation.TabIndex = 11;
@@ -126,7 +130,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(206, 35);
+            this.label5.Location = new System.Drawing.Point(245, 35);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 10;
@@ -134,7 +138,7 @@
             // 
             // txtRotation
             // 
-            this.txtRotation.Location = new System.Drawing.Point(278, 12);
+            this.txtRotation.Location = new System.Drawing.Point(317, 12);
             this.txtRotation.Name = "txtRotation";
             this.txtRotation.Size = new System.Drawing.Size(100, 20);
             this.txtRotation.TabIndex = 9;
@@ -142,7 +146,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(222, 15);
+            this.label6.Location = new System.Drawing.Point(261, 15);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 13);
             this.label6.TabIndex = 8;
@@ -150,7 +154,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(157, 372);
+            this.btnSave.Location = new System.Drawing.Point(261, 372);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 18;
@@ -160,7 +164,7 @@
             // 
             // txtTimeTillNext
             // 
-            this.txtTimeTillNext.Location = new System.Drawing.Point(278, 73);
+            this.txtTimeTillNext.Location = new System.Drawing.Point(317, 73);
             this.txtTimeTillNext.Name = "txtTimeTillNext";
             this.txtTimeTillNext.Size = new System.Drawing.Size(100, 20);
             this.txtTimeTillNext.TabIndex = 20;
@@ -168,7 +172,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(198, 76);
+            this.label10.Location = new System.Drawing.Point(237, 76);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(77, 13);
             this.label10.TabIndex = 19;
@@ -178,14 +182,54 @@
             // 
             this.treeXML.Location = new System.Drawing.Point(16, 99);
             this.treeXML.Name = "treeXML";
-            this.treeXML.Size = new System.Drawing.Size(362, 267);
+            this.treeXML.Size = new System.Drawing.Size(401, 267);
             this.treeXML.TabIndex = 21;
+            // 
+            // btnCamera
+            // 
+            this.btnCamera.Location = new System.Drawing.Point(342, 372);
+            this.btnCamera.Name = "btnCamera";
+            this.btnCamera.Size = new System.Drawing.Size(75, 23);
+            this.btnCamera.TabIndex = 22;
+            this.btnCamera.Text = "Cancel";
+            this.btnCamera.UseVisualStyleBackColor = true;
+            // 
+            // btnAddNew
+            // 
+            this.btnAddNew.Location = new System.Drawing.Point(16, 372);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNew.TabIndex = 23;
+            this.btnAddNew.Text = "Add New";
+            this.btnAddNew.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(98, 372);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEdit.TabIndex = 24;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(180, 372);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 25;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // CycleNodeProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 402);
+            this.ClientSize = new System.Drawing.Size(426, 402);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnAddNew);
+            this.Controls.Add(this.btnCamera);
             this.Controls.Add(this.treeXML);
             this.Controls.Add(this.txtTimeTillNext);
             this.Controls.Add(this.label10);
@@ -227,5 +271,9 @@
         private System.Windows.Forms.TextBox txtTimeTillNext;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TreeView treeXML;
+        private System.Windows.Forms.Button btnCamera;
+        private System.Windows.Forms.Button btnAddNew;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
