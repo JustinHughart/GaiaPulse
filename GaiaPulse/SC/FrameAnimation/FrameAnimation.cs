@@ -464,9 +464,7 @@ namespace GaiaPulse.SC.FrameAnimation
 
                      //Load custom XML.
 
-
-
-
+                     animnode.CustomXML = node.Element("CustomXML");
                      
                      anim.AddNode(animnode);
                  }
