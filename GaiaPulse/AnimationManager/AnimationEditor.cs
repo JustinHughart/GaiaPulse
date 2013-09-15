@@ -133,5 +133,23 @@ namespace GaiaPulse.AnimationManager
         {
             OpenSaveDialog();
         }
+
+        private void OpenToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.RestoreDirectory = true;
+            ofd.InitialDirectory = Program.AppDir;
+            ofd.Filter = "Gaia Pulse Animation | *.ani";
+            ofd.ShowDialog();
+
+            if (ofd.FileName != "")
+            {
+                SavePath = ofd.FileName;
+
+                Text = "Gaia Pulse Animation Editor - " + SavePath + " -";
+
+                Editor.LoadAnim();
+            }
+        }
     }
 }
