@@ -128,5 +128,10 @@ namespace GaiaPulse.AnimationManager
                 Editor.NewAnimation();
             }
         }
+
+        private void SaveAsToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            OpenSaveDialog();
+        }
     }
 }

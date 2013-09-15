@@ -43,6 +43,7 @@
             this.cycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Editor = new GaiaPulse.AnimationManager.EditorControl();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +66,7 @@
             this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.msNew,
             this.msSave,
+            this.saveAsToolStripMenuItem,
             this.msExit});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -73,21 +75,21 @@
             // msNew
             // 
             this.msNew.Name = "msNew";
-            this.msNew.Size = new System.Drawing.Size(98, 22);
+            this.msNew.Size = new System.Drawing.Size(152, 22);
             this.msNew.Text = "New";
             this.msNew.Click += new System.EventHandler(this.NewToolStripMenuItemClick);
             // 
             // msSave
             // 
             this.msSave.Name = "msSave";
-            this.msSave.Size = new System.Drawing.Size(98, 22);
+            this.msSave.Size = new System.Drawing.Size(152, 22);
             this.msSave.Text = "Save";
             this.msSave.Click += new System.EventHandler(this.SaveToolStripMenuItem1Click);
             // 
             // msExit
             // 
             this.msExit.Name = "msExit";
-            this.msExit.Size = new System.Drawing.Size(98, 22);
+            this.msExit.Size = new System.Drawing.Size(152, 22);
             this.msExit.Text = "Exit";
             this.msExit.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
@@ -168,6 +170,13 @@
             this.Editor.TabIndex = 1;
             this.Editor.Text = "editor";
             // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItemClick);
+            // 
             // AnimationEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,5 +212,6 @@
         private System.Windows.Forms.ToolStripMenuItem texturesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem msNew;
         private EditorControl Editor;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
     }
 }
