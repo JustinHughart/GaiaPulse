@@ -43,10 +43,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.txtTimeTillNext = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.dgvTags = new System.Windows.Forms.DataGridView();
-            this.Tag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTags)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -177,34 +173,11 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Time Till Next: ";
             // 
-            // dgvTags
-            // 
-            this.dgvTags.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvTags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Tag,
-            this.Value});
-            this.dgvTags.Location = new System.Drawing.Point(7, 103);
-            this.dgvTags.Name = "dgvTags";
-            this.dgvTags.Size = new System.Drawing.Size(371, 150);
-            this.dgvTags.TabIndex = 21;
-            // 
-            // Tag
-            // 
-            this.Tag.HeaderText = "Tag";
-            this.Tag.Name = "Tag";
-            // 
-            // Value
-            // 
-            this.Value.HeaderText = "Value";
-            this.Value.Name = "Value";
-            // 
-            // NodeProperties
+            // CycleNodeProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(388, 288);
-            this.Controls.Add(this.dgvTags);
             this.Controls.Add(this.txtTimeTillNext);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.btnSave);
@@ -220,9 +193,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtVelocityX);
             this.Controls.Add(this.label1);
-            this.Name = "NodeProperties";
+            this.Name = "CycleNodeProperties";
             this.Text = "NodeProperties";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTags)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,8 +217,5 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox txtTimeTillNext;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DataGridView dgvTags;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
     }
 }
