@@ -16,8 +16,6 @@ namespace GaiaPulse.AnimationManager
         {
             InitializeComponent();
          
-            SavePath = "";
-
             SavePath = "New Animation";
 
             this.Text = "Gaia Pulse Animation Editor - " + SavePath + " -";
@@ -35,7 +33,33 @@ namespace GaiaPulse.AnimationManager
 
         private void SaveToolStripMenuItem1Click(object sender, EventArgs e)
         {
-            Editor.SaveAnim();
+            if (SavePath == "New Animation")
+            {
+                OpenSaveDialog();
+            }
+            else
+            {
+                Editor.SaveAnim();
+                MessageBox.Show("File saved. Old file backed up.", "File saved!");
+            }
+        }
+
+        private void OpenSaveDialog()
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.RestoreDirectory = true;
+            sfd.InitialDirectory = Program.AppDir;
+            sfd.Filter = "Gaia Pulse Animation | *.ani";
+            sfd.ShowDialog();
+
+            if (sfd.FileName != "")
+            {
+                SavePath = sfd.FileName;
+
+                Text = "Gaia Pulse Animation Editor - " + SavePath + " -";
+
+                Editor.SaveAnim();
+            }
         }
 
         private void ExitToolStripMenuItemClick(object sender, EventArgs e)
