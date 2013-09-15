@@ -43,6 +43,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.txtTimeTillNext = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.treeXML = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
             // label1
@@ -107,7 +108,7 @@
             // chkSmoothY
             // 
             this.chkSmoothY.AutoSize = true;
-            this.chkSmoothY.Location = new System.Drawing.Point(76, 76);
+            this.chkSmoothY.Location = new System.Drawing.Point(76, 77);
             this.chkSmoothY.Name = "chkSmoothY";
             this.chkSmoothY.Size = new System.Drawing.Size(15, 14);
             this.chkSmoothY.TabIndex = 7;
@@ -149,7 +150,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(157, 259);
+            this.btnSave.Location = new System.Drawing.Point(157, 372);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 18;
@@ -173,11 +174,19 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Time Till Next: ";
             // 
+            // treeXML
+            // 
+            this.treeXML.Location = new System.Drawing.Point(16, 99);
+            this.treeXML.Name = "treeXML";
+            this.treeXML.Size = new System.Drawing.Size(362, 267);
+            this.treeXML.TabIndex = 21;
+            // 
             // CycleNodeProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 288);
+            this.ClientSize = new System.Drawing.Size(388, 402);
+            this.Controls.Add(this.treeXML);
             this.Controls.Add(this.txtTimeTillNext);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.btnSave);
@@ -217,5 +226,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox txtTimeTillNext;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TreeView treeXML;
     }
 }
