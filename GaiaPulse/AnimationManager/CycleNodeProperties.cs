@@ -163,6 +163,10 @@ namespace GaiaPulse.AnimationManager
                     MessageBox.Show("Please select either an 'attributes' or 'elements' node before attempting to add an item.");
                 }
             }
+            else
+            {
+                MessageBox.Show("Please select a node first.");
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -170,9 +174,36 @@ namespace GaiaPulse.AnimationManager
 
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDeleteClick(object sender, EventArgs e)
         {
+            if (treeXML.SelectedNode != null)
+            {
+                if (treeXML.SelectedNode.Parent != null)
+                {
+                    if (treeXML.SelectedNode.Parent.Text == "Attributes" || treeXML.SelectedNode.Parent.Text == "Elements")
+                    {
+                        var result = MessageBox.Show("Are you sure you want to delete this node and all subnodes?", "Really delete?", MessageBoxButtons.OKCancel);
 
+                        if (result == DialogResult.OK)
+                        {
+                            treeXML.SelectedNode.Parent.Nodes.Remove(treeXML.SelectedNode);
+                            MessageBox.Show("Node deleted.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cannot delete this node.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Cannot delete this node.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a node first.");
+            }
         }
 
         private void BtnCancelClick(object sender, EventArgs e)
