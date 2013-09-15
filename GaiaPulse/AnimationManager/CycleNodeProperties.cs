@@ -103,5 +103,25 @@ namespace GaiaPulse.AnimationManager
         {
             
         }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnCancelClick(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
