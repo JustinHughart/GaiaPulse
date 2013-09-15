@@ -40,6 +40,8 @@ namespace GaiaPulse.AnimationManager
             txtTimeTillNext.Text = _node.TimeTillNext.ToString();
 
             LoadXML();
+
+            treeXML.ExpandAll();
         }
 
         private void BtnSaveClick(object sender, EventArgs e)
@@ -72,8 +74,10 @@ namespace GaiaPulse.AnimationManager
 
             foreach (var attribute in attributes)
             {
-                TreeNode newnode = new TreeNode(attribute.Name + " = " + attribute.Value);
-                attributenode.Nodes.Add(newnode);
+                TreeNode namenode = new TreeNode(attribute.Name.ToString());
+                attributenode.Nodes.Add(namenode);
+                TreeNode valuenode = new TreeNode(attribute.Value);
+                namenode.Nodes.Add(valuenode);
             }
 
             if (parent == null)
@@ -104,9 +108,61 @@ namespace GaiaPulse.AnimationManager
             
         }
 
-        private void btnAddNew_Click(object sender, EventArgs e)
+        private void BtnAddNewClick(object sender, EventArgs e)
         {
+            if (treeXML.SelectedNode != null)
+            {
+                if (treeXML.SelectedNode.Text == "Attributes" || treeXML.SelectedNode.Text == "Elements")
+                {
+                    String nodename = Microsoft.VisualBasic.Interaction.InputBox("Please enter the name of the new node.", "New Node Creation");
 
+                    if (nodename != "")
+                    {
+                        foreach (TreeNode node in treeXML.SelectedNode.Nodes)
+                        {
+                            if (node.Text == nodename)
+                            {
+                                MessageBox.Show("Node already exists.");
+
+                                return; 
+                            }
+                        }
+
+                        if (nodename.ToLower() == "attributes" || nodename.ToLower() == "elements")
+                        {
+                            MessageBox.Show("Name is invalid.");
+                        }
+                        else
+                        {
+                            var newnode = new TreeNode(nodename);
+                            treeXML.SelectedNode.Nodes.Add(newnode);
+                            treeXML.SelectedNode.Expand();
+
+                            if (treeXML.SelectedNode.Text == "Attributes")
+                            {
+                                var valuenode = new TreeNode("value");
+                                newnode.Nodes.Add(valuenode);
+                                newnode.Expand();
+                            }
+
+                            if (treeXML.SelectedNode.Text == "Elements")
+                            {
+                                var attribnode = new TreeNode("Attributes");
+                                var elenode = new TreeNode("Elements");
+
+                                newnode.Nodes.Add(attribnode);
+                                newnode.Nodes.Add(elenode);
+
+                                newnode.Expand();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select either an 'attributes' or 'elements' node before attempting to add an item.");
+                }
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
