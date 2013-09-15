@@ -31,7 +31,7 @@ namespace GaiaPulse.SC.FrameAnimation
         {
             _owner = owner;
             TimeTillNext = timeTillNext;
-            CustomXML = new XElement("customxml");
+            CustomXML = new XElement("CustomXML");
         }
         
         public void Draw(SpriteBatch spriteBatch, Vector2 position, bool facingRight, Vector2 scale, float rotation)
