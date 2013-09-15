@@ -643,15 +643,18 @@ namespace GaiaPulse.AnimationManager
 
             //Save
 
-            String newpath = path.Substring(0, path.Length - ".ani".Length) + ".bak";
-
-            if (File.Exists(newpath))
+            if (File.Exists(path))
             {
-                File.Delete(newpath);
-            }
+                String backuppath = path.Substring(0, path.Length - ".ani".Length) + ".bak";
 
-            File.Copy(path, newpath);
-            File.Delete(path);
+                if (File.Exists(backuppath))
+                {
+                    File.Delete(backuppath);
+                }
+
+                File.Copy(path, backuppath);
+                File.Delete(path);
+            }
 
             XDocument doc = new XDocument(anim);
 
