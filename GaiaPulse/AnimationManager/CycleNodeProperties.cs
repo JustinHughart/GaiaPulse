@@ -105,7 +105,35 @@ namespace GaiaPulse.AnimationManager
 
         private void SaveXML()
         {
+            XElement save = RecurseSave(null, treeXML.Nodes[0]);
             
+            _node.CustomXML = save;
+        }
+
+        private XElement RecurseSave(XElement parent, TreeNode node)
+        {
+            XElement newnode = new XElement(node.Text);
+
+            if (parent != null)
+            {
+                parent.Add(newnode);
+            }
+
+            var attribnode = node.Nodes[0];
+
+            foreach (TreeNode attrib in attribnode.Nodes)
+            {
+                newnode.Add(new XAttribute(attrib.Text,  attrib.Nodes[0].Text));
+            }
+
+            var elenode = node.Nodes[1];
+
+            foreach (TreeNode child in elenode.Nodes)
+            {
+                RecurseSave(newnode, child);
+            }
+
+            return newnode;
         }
 
         private void BtnAddNewClick(object sender, EventArgs e)
