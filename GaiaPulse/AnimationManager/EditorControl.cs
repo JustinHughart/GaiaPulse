@@ -260,11 +260,7 @@ namespace GaiaPulse.AnimationManager
 
                     _spritebatch.DrawString(_font, boxdata, new Vector2(0, numlines * 32), Color.White);
                     numlines++;
-
-                    numlines++;
-                    numlines++;
-
-
+                                        
                     if (_showlegend)
                     {
                         _spritebatch.DrawString(_font, "Up: Hitbox Y -", new Vector2(0, numlines * 32), Color.White);
@@ -304,9 +300,6 @@ namespace GaiaPulse.AnimationManager
                         numlines++;
 
                         _spritebatch.DrawString(_font, "D: Change Hitbox Type", new Vector2(0, numlines * 32), Color.White);
-                        numlines++;
-
-                        _spritebatch.DrawString(_font, "F: Change Damage Profile", new Vector2(0, numlines * 32), Color.White);
                         numlines++;
 
                         _spritebatch.DrawString(_font, "F: Change Group ID", new Vector2(0, numlines * 32), Color.White);
@@ -968,7 +961,7 @@ namespace GaiaPulse.AnimationManager
                     }
                 }
 
-                if (_input.IsKeyPressed(Keys.G))
+                if (_input.IsKeyPressed(Keys.F))
                 {
                     String group = Microsoft.VisualBasic.Interaction.InputBox("Please enter hitbox's group name.", "Hitbox Group ID Input", box.Group);
 
