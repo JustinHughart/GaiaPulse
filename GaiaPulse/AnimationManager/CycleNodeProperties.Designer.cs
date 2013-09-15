@@ -44,7 +44,7 @@
             this.txtTimeTillNext = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.treeXML = new System.Windows.Forms.TreeView();
-            this.btnCamera = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -185,14 +185,15 @@
             this.treeXML.Size = new System.Drawing.Size(401, 267);
             this.treeXML.TabIndex = 21;
             // 
-            // btnCamera
+            // btnCancel
             // 
-            this.btnCamera.Location = new System.Drawing.Point(342, 372);
-            this.btnCamera.Name = "btnCamera";
-            this.btnCamera.Size = new System.Drawing.Size(75, 23);
-            this.btnCamera.TabIndex = 22;
-            this.btnCamera.Text = "Cancel";
-            this.btnCamera.UseVisualStyleBackColor = true;
+            this.btnCancel.Location = new System.Drawing.Point(342, 372);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 22;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
             // 
             // btnAddNew
             // 
@@ -202,6 +203,7 @@
             this.btnAddNew.TabIndex = 23;
             this.btnAddNew.Text = "Add New";
             this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // btnEdit
             // 
@@ -211,6 +213,7 @@
             this.btnEdit.TabIndex = 24;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -220,6 +223,7 @@
             this.btnDelete.TabIndex = 25;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // CycleNodeProperties
             // 
@@ -229,7 +233,7 @@
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAddNew);
-            this.Controls.Add(this.btnCamera);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.treeXML);
             this.Controls.Add(this.txtTimeTillNext);
             this.Controls.Add(this.label10);
@@ -271,7 +275,7 @@
         private System.Windows.Forms.TextBox txtTimeTillNext;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TreeView treeXML;
-        private System.Windows.Forms.Button btnCamera;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
