@@ -602,9 +602,8 @@ namespace GaiaPulse.AnimationManager
                     
                     //Set Custom XML.
 
-
-
-
+                    node.Add(animnode.CustomXML);
+                    
                     cycle.Add(node);
                 }
 
