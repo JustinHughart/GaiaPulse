@@ -214,7 +214,7 @@
             this.btnEdit.TabIndex = 24;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnEdit.Click += new System.EventHandler(this.BtnEditClick);
             // 
             // btnDelete
             // 
