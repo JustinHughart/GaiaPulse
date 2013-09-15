@@ -169,9 +169,43 @@ namespace GaiaPulse.AnimationManager
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void BtnEditClick(object sender, EventArgs e)
         {
+            if (treeXML.SelectedNode != null)
+            {
+                if (treeXML.SelectedNode.Parent == null)
+                {
+                    MessageBox.Show("Cannot edit this node.");
+                    return; 
+                }
 
+                if (treeXML.SelectedNode.Text == "Attributes" || treeXML.SelectedNode.Text == "Elements" || treeXML.SelectedNode.Text == "CustomXML")
+                {
+                    MessageBox.Show("Cannot edit this node.");
+                }
+                else
+                {
+                    String nodename = Microsoft.VisualBasic.Interaction.InputBox("Please enter the new name of the new node.", "Node Editting");
+
+                    if (nodename != "")
+                    {
+                        foreach (TreeNode node in treeXML.SelectedNode.Parent.Nodes)
+                        {
+                            if (node.Text == nodename)
+                            {
+                                MessageBox.Show("Cannot make this change.");
+                                return;
+                            }
+                        }
+
+                        treeXML.SelectedNode.Text = nodename;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a node first.");
+            }
         }
 
         private void BtnDeleteClick(object sender, EventArgs e)
