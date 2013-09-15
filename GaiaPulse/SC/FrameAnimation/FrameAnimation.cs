@@ -444,8 +444,7 @@ namespace GaiaPulse.SC.FrameAnimation
                      {
                          float radians = 0f;
                          bool smoothrot = false;
-
-
+                         
                          var radianattrib = velocityelement.Attribute("radians");
 
                          if (radianattrib != null)
@@ -463,32 +462,12 @@ namespace GaiaPulse.SC.FrameAnimation
                          animnode.SetRotation(radians, smoothrot);
                      }
 
-                     //Tags
+                     //Load custom XML.
 
-                     var tags = node.Element("tags");
 
-                     if (tags != null)
-                     {
-                         Dictionary<String, String> tagdict = new Dictionary<string, string>();
 
-                         foreach (var element in tags.Elements())
-                         {
-                             string tagname = element.Name.ToString();
-                             string tagvalue = "";
 
-                             var valattrib = element.Attribute("value");
-
-                             if (valattrib != null)
-                             {
-                                 tagvalue = valattrib.Value;
-                             }
-
-                             tagdict.Add(tagname, tagvalue);
-                         }
-
-                         animnode.SetTags(tagdict);
-                     }
-
+                     
                      anim.AddNode(animnode);
                  }
              }
