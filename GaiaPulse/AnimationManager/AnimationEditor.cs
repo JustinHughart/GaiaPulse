@@ -18,7 +18,7 @@ namespace GaiaPulse.AnimationManager
          
             SavePath = "New Animation";
 
-            this.Text = "Gaia Pulse Animation Editor - " + SavePath + " -";
+            ChangeTitle();
             
             Editor.SetWinForm(this);
 
@@ -56,7 +56,7 @@ namespace GaiaPulse.AnimationManager
             {
                 SavePath = sfd.FileName;
 
-                Text = "Gaia Pulse Animation Editor - " + SavePath + " -";
+                ChangeTitle();
 
                 Editor.SaveAnim();
             }
@@ -146,10 +146,15 @@ namespace GaiaPulse.AnimationManager
             {
                 SavePath = ofd.FileName;
 
-                Text = "Gaia Pulse Animation Editor - " + SavePath + " -";
+                ChangeTitle();
 
                 Editor.LoadAnim();
             }
+        }
+
+        private void ChangeTitle()
+        {
+            Text = "Gaia Pulse Animation Editor - " + SavePath + " -";
         }
     }
 }
