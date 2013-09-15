@@ -600,33 +600,10 @@ namespace GaiaPulse.AnimationManager
                         node.Add(rotation);
                     }
                     
-                    //Set Tags
+                    //Set Custom XML.
 
-                    Dictionary<String, String> tags = animnode.GetTags();
 
-                    if (tags.Count > 0)
-                    {
-                        XElement tagselement = new XElement("tags");
 
-                        foreach (var tag in tags)
-                        {
-                            XElement tagelement = new XElement(tag.Key);
-
-                            if (tag.Value != "")
-                            {
-                                tagelement.Add(new XAttribute("value", tag.Value));
-                            }
-
-                            tagselement.Add(tagelement);
-                        }
-
-                        node.Add(tagselement);
-                    }
-
-                    //Set Effects
-
-                    //Set Particools
-                    
 
                     cycle.Add(node);
                 }

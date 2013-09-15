@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -23,14 +24,14 @@ namespace GaiaPulse.SC.FrameAnimation
         public float Rotation { get; private set; }
         public bool SmoothRotation { get; private set; }
 
-        //List of tags
-        Dictionary<string, string> _tags;
+        //Custom XML
+        public XElement CustomXML;
 
         public AnimNode(FrameAnimation owner, int timeTillNext) //Constructor
         {
             _owner = owner;
             TimeTillNext = timeTillNext;
-            _tags = new Dictionary<string, string>();
+            CustomXML = new XElement("customxml");
         }
         
         public void Draw(SpriteBatch spriteBatch, Vector2 position, bool facingRight, Vector2 scale, float rotation)
@@ -69,16 +70,6 @@ namespace GaiaPulse.SC.FrameAnimation
         public override string ToString()
         {
             return DrawData.ToString();
-        }
-
-        public Dictionary<String, String> GetTags()
-        {
-            return _tags;
-        }
-
-        public void SetTags(Dictionary<String, String> tags)
-        {
-            _tags = tags;
         }
     }
 }
