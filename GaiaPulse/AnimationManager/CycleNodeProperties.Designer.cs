@@ -180,6 +180,7 @@
             // 
             // treeXML
             // 
+            this.treeXML.HideSelection = false;
             this.treeXML.Location = new System.Drawing.Point(16, 99);
             this.treeXML.Name = "treeXML";
             this.treeXML.Size = new System.Drawing.Size(401, 267);
@@ -203,7 +204,7 @@
             this.btnAddNew.TabIndex = 23;
             this.btnAddNew.Text = "Add New";
             this.btnAddNew.UseVisualStyleBackColor = true;
-            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            this.btnAddNew.Click += new System.EventHandler(this.BtnAddNewClick);
             // 
             // btnEdit
             // 
