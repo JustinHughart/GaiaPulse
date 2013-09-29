@@ -8,19 +8,24 @@ namespace GaiaPulse.AnimationManager.EditorData
         Vector2 _windowSize;
 
         private KeyboardState _keyboardstate;
-        private KeyboardState _prevstate;
-        
+        private KeyboardState _prevkbstate;
+
+        private MouseState _mousestate;
+        private MouseState _prevmousestate;
         
         public Input(Vector2 windowSize)
         {
             this._windowSize = windowSize;
-            _keyboardstate = _prevstate = Keyboard.GetState();
+            _keyboardstate = _prevkbstate = Keyboard.GetState();
+            _mousestate = _prevmousestate = Mouse.GetState();
         }
 
         public void Update()
         {
-            _prevstate = _keyboardstate;
+            _prevkbstate = _keyboardstate;
             _keyboardstate = Keyboard.GetState();
+            _prevmousestate = _mousestate;
+            _mousestate = Mouse.GetState();
         }
 
         public bool IsKeyDown(Keys key)
@@ -35,12 +40,12 @@ namespace GaiaPulse.AnimationManager.EditorData
 
         public bool IsKeyPressed(Keys key)
         {
-            return _keyboardstate.IsKeyDown(key) && _prevstate.IsKeyUp(key);
+            return _keyboardstate.IsKeyDown(key) && _prevkbstate.IsKeyUp(key);
         }
 
         public bool IsKeyReleased(Keys key)
         {
-            return _keyboardstate.IsKeyUp(key) && _prevstate.IsKeyDown(key);
+            return _keyboardstate.IsKeyUp(key) && _prevkbstate.IsKeyDown(key);
         }
     }
 }

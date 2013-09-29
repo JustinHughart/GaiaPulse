@@ -41,32 +41,32 @@ namespace GaiaPulse.AnimationManager.EditorData
         {
             float rate = 3;
 
-            if (input.IsKeyDown(Keys.Left))
+            if (input.IsKBKeyDown(Keys.Left))
             {
                 Position.X -= rate;
             }
 
-            if (input.IsKeyDown(Keys.Right))
+            if (input.IsKBKeyDown(Keys.Right))
             {
                 Position.X += rate;
             }
 
-            if (input.IsKeyDown(Keys.Up))
+            if (input.IsKBKeyDown(Keys.Up))
             {
                 Position.Y -= rate;
             }
 
-            if (input.IsKeyDown(Keys.Down))
+            if (input.IsKBKeyDown(Keys.Down))
             {
                 Position.Y += rate;
             }
 
-            if (input.IsKeyDown(Keys.Subtract))
+            if (input.IsKBKeyDown(Keys.Subtract))
             {
                 Zoom = Math.Max(0.1f, Zoom - 0.02f);
             }
 
-            if (input.IsKeyDown(Keys.Add))
+            if (input.IsKBKeyDown(Keys.Add))
             {
                 Zoom = Math.Min(3f, Zoom + 0.02f);
             }
