@@ -641,53 +641,53 @@ namespace GaiaPulse.AnimationManager
 
         private void CheckStandardKeys()
         {
-            if (_input.IsKeyPressed(Keys.D1))
+            if (_input.IsKBKeyPressed(Keys.D1))
             {
                 State = EditorModeState.Camera;
             }
 
-            if (_input.IsKeyPressed(Keys.D2))
+            if (_input.IsKBKeyPressed(Keys.D2))
             {
                 State = EditorModeState.SetDrawArea;
             }
 
-            if (_input.IsKeyPressed(Keys.D3))
+            if (_input.IsKBKeyPressed(Keys.D3))
             {
                 State = EditorModeState.SetOrigin;
             }
 
-            if (_input.IsKeyPressed(Keys.D4))
+            if (_input.IsKBKeyPressed(Keys.D4))
             {
                 State = EditorModeState.SetOffsets;
             }
 
-            if (_input.IsKeyPressed(Keys.D5))
+            if (_input.IsKBKeyPressed(Keys.D5))
             {
                 State = EditorModeState.SetHitboxes;
             }
 
-            if (_input.IsKeyPressed(Keys.D6))
+            if (_input.IsKBKeyPressed(Keys.D6))
             {
                 State = EditorModeState.Overview;
             }
 
-            if (_input.IsKeyPressed(Keys.Tab))
+            if (_input.IsKBKeyPressed(Keys.Tab))
             {
                 _facingright = !_facingright;
             }
 
-            if (_input.IsKeyPressed(Keys.F12))
+            if (_input.IsKBKeyPressed(Keys.F12))
             {
                 _showlegend = !_showlegend;
             }
 
-            if (_input.IsKeyPressed(Keys.Q))
+            if (_input.IsKBKeyPressed(Keys.Q))
             {
                 _currframe = Math.Max(0, _currframe - 1);
                 _currhitbox = 0;
             }
 
-            if (_input.IsKeyPressed(Keys.W))
+            if (_input.IsKBKeyPressed(Keys.W))
             {
                 _currframe = Math.Min(Frames.Count-1, _currframe + 1);
                 _currhitbox = 0;
@@ -700,47 +700,47 @@ namespace GaiaPulse.AnimationManager
 
             int rate = 1;
 
-            if (_input.IsKeyDown(Keys.LeftControl))
+            if (_input.IsKBKeyDown(Keys.LeftControl))
             {
                 rate *= 5;
             }
 
-            if (_input.IsKeyDown(Keys.Left))
+            if (_input.IsKBKeyDown(Keys.Left))
             {
                 drawarea.X = Math.Max(0, drawarea.X - rate);
             }
 
-            if (_input.IsKeyDown(Keys.Right))
+            if (_input.IsKBKeyDown(Keys.Right))
             {
                 drawarea.X = Math.Min(2048, drawarea.X + rate);
             }
 
-            if (_input.IsKeyDown(Keys.Up))
+            if (_input.IsKBKeyDown(Keys.Up))
             {
                 drawarea.Y = Math.Max(0, drawarea.Y - rate);
             }
 
-            if (_input.IsKeyDown(Keys.Down))
+            if (_input.IsKBKeyDown(Keys.Down))
             {
                 drawarea.Y = Math.Min(2048, drawarea.Y + rate);
             }
 
-            if (_input.IsKeyDown(Keys.NumPad4))
+            if (_input.IsKBKeyDown(Keys.NumPad4))
             {
                 drawarea.Width = Math.Max(0, drawarea.Width - rate);
             }
 
-            if (_input.IsKeyDown(Keys.NumPad6))
+            if (_input.IsKBKeyDown(Keys.NumPad6))
             {
                 drawarea.Width = Math.Min(2048, drawarea.Width + rate);
             }
 
-            if (_input.IsKeyDown(Keys.NumPad8))
+            if (_input.IsKBKeyDown(Keys.NumPad8))
             {
                 drawarea.Height = Math.Max(0, drawarea.Height - rate);
             }
 
-            if (_input.IsKeyDown(Keys.NumPad2))
+            if (_input.IsKBKeyDown(Keys.NumPad2))
             {
                 drawarea.Height = Math.Min(2048, drawarea.Height + rate);
             }
@@ -754,27 +754,27 @@ namespace GaiaPulse.AnimationManager
 
             int rate = 1;
 
-            if (_input.IsKeyDown(Keys.LeftControl))
+            if (_input.IsKBKeyDown(Keys.LeftControl))
             {
                 rate *= 5;
             }
 
-            if (_input.IsKeyDown(Keys.Left))
+            if (_input.IsKBKeyDown(Keys.Left))
             {
                 origin.X = Math.Max(0, origin.X - rate);
             }
 
-            if (_input.IsKeyDown(Keys.Right))
+            if (_input.IsKBKeyDown(Keys.Right))
             {
                 origin.X = Math.Min(2048, origin.X + rate);
             }
 
-            if (_input.IsKeyDown(Keys.Up))
+            if (_input.IsKBKeyDown(Keys.Up))
             {
                 origin.Y = Math.Max(0, origin.Y - rate);
             }
 
-            if (_input.IsKeyDown(Keys.Down))
+            if (_input.IsKBKeyDown(Keys.Down))
             {
                 origin.Y = Math.Min(2048, origin.Y + rate);
             }
@@ -788,12 +788,12 @@ namespace GaiaPulse.AnimationManager
 
             int rate = 1;
 
-            if (_input.IsKeyDown(Keys.LeftControl))
+            if (_input.IsKBKeyDown(Keys.LeftControl))
             {
                 rate *= 5;
             }
 
-            if (_input.IsKeyDown(Keys.Left))
+            if (_input.IsKBKeyDown(Keys.Left))
             {
                 if (_facingright)
                 {
@@ -805,7 +805,7 @@ namespace GaiaPulse.AnimationManager
                 }
             }
 
-            if (_input.IsKeyDown(Keys.Right))
+            if (_input.IsKBKeyDown(Keys.Right))
             {
                 if (_facingright)
                 {
@@ -817,12 +817,12 @@ namespace GaiaPulse.AnimationManager
                 }
             }
 
-            if (_input.IsKeyDown(Keys.Up))
+            if (_input.IsKBKeyDown(Keys.Up))
             {
                 offsets.Y -= rate;
             }
 
-            if (_input.IsKeyDown(Keys.Down))
+            if (_input.IsKBKeyDown(Keys.Down))
             {
                 offsets.Y += rate;
             }
@@ -832,22 +832,22 @@ namespace GaiaPulse.AnimationManager
 
         private void CheckHitboxKeys()
         {
-            if (_input.IsKeyPressed(Keys.A))
+            if (_input.IsKBKeyPressed(Keys.A))
             {
                 _currhitbox = Math.Max(0, _currhitbox - 1);
             }
 
-            if (_input.IsKeyPressed(Keys.S))
+            if (_input.IsKBKeyPressed(Keys.S))
             {
                 _currhitbox = Math.Min(CurrFrame().GetBoxes().Count - 1, _currhitbox + 1);
             }
 
-            if (_input.IsKeyPressed(Keys.Insert))
+            if (_input.IsKBKeyPressed(Keys.Insert))
             {
                 AddHitbox();
             }
 
-            if (_input.IsKeyPressed(Keys.Delete))
+            if (_input.IsKBKeyPressed(Keys.Delete))
             {
                 DeleteHitbox();
             }
@@ -862,12 +862,12 @@ namespace GaiaPulse.AnimationManager
 
                 int rate = 1;
 
-                if (_input.IsKeyDown(Keys.LeftControl))
+                if (_input.IsKBKeyDown(Keys.LeftControl))
                 {
                     rate *= 5;
                 }
 
-                if (_input.IsKeyDown(Keys.Left))
+                if (_input.IsKBKeyDown(Keys.Left))
                 {
                     if (_facingright)
                     {
@@ -879,7 +879,7 @@ namespace GaiaPulse.AnimationManager
                     }
                 }
 
-                if (_input.IsKeyDown(Keys.Right))
+                if (_input.IsKBKeyDown(Keys.Right))
                 {
                     if (_facingright)
                     {
@@ -891,37 +891,37 @@ namespace GaiaPulse.AnimationManager
                     }
                 }
 
-                if (_input.IsKeyDown(Keys.Up))
+                if (_input.IsKBKeyDown(Keys.Up))
                 {
                     rect.Y -= rate;
                 }
 
-                if (_input.IsKeyDown(Keys.Down))
+                if (_input.IsKBKeyDown(Keys.Down))
                 {
                     rect.Y += rate;
                 }
 
-                if (_input.IsKeyDown(Keys.NumPad4))
+                if (_input.IsKBKeyDown(Keys.NumPad4))
                 {
                     rect.Width = Math.Max(0, rect.Width - rate);
                 }
 
-                if (_input.IsKeyDown(Keys.NumPad6))
+                if (_input.IsKBKeyDown(Keys.NumPad6))
                 {
                     rect.Width += rate;
                 }
 
-                if (_input.IsKeyDown(Keys.NumPad8))
+                if (_input.IsKBKeyDown(Keys.NumPad8))
                 {
                     rect.Height = Math.Max(0, rect.Height - rate);
                 }
 
-                if (_input.IsKeyDown(Keys.NumPad2))
+                if (_input.IsKBKeyDown(Keys.NumPad2))
                 {
                     rect.Height += rate;
                 }
 
-                if (_input.IsKeyPressed(Keys.D))
+                if (_input.IsKBKeyPressed(Keys.D))
                 {
                     switch (type)
                     {
@@ -937,7 +937,7 @@ namespace GaiaPulse.AnimationManager
                     }
                 }
 
-                if (_input.IsKeyPressed(Keys.F))
+                if (_input.IsKBKeyPressed(Keys.F))
                 {
                     String group = Microsoft.VisualBasic.Interaction.InputBox("Please enter hitbox's group name.", "Hitbox Group ID Input", box.Group);
 
