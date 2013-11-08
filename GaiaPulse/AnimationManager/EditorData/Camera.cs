@@ -8,23 +8,26 @@ namespace GaiaPulse.AnimationManager.EditorData
     {
         public Vector2 Position;
         public float Zoom;
-        public Vector2 RoomSize;
+        public Vector2 ControlSize;
 
-        public Camera()
+        public Camera(Vector2 controlSize)
         {
-            Position = Vector2.Zero;
             Zoom = 1f;
-        }
-
-        public void SetRoomSize(Vector2 roomSize)
-        {
-            this.RoomSize = roomSize;
-            Position = roomSize / 2;
+            ControlSize = controlSize;
+            Position = controlSize / 2;
         }
 
         public Matrix ReturnView()
         {
-            return Matrix.CreateTranslation(Position.X, Position.Y, 0) * Matrix.CreateTranslation(new Vector3(-RoomSize.X / 2, -RoomSize.Y / 2, 0)) * Matrix.CreateScale(Zoom) * Matrix.CreateTranslation(new Vector3(RoomSize.X / 2, RoomSize.Y / 2, 0));
+            return Matrix.CreateTranslation(Position.X, Position.Y, 0) *
+                Matrix.CreateTranslation(new Vector3(-ControlSize.X / 2, -ControlSize.Y / 2, 0)) *
+                Matrix.CreateScale(Zoom) *
+                Matrix.CreateTranslation(new Vector3(ControlSize.X / 2, ControlSize.Y / 2, 0));
+        }
+
+        public Matrix GetSizeMatrix()
+        {
+            return Matrix.CreateScale(Zoom);
         }
 
         public void MoveCamera(Vector2 velocity)

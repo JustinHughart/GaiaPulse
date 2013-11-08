@@ -8,10 +8,9 @@ namespace GaiaPulse.AnimationManager.EditorData
         Left, Right, Middle,
     }
 
-
     public class Input
     {
-        Vector2 _windowSize;
+        EditorControl _control;
 
         private KeyboardState _keyboardstate;
         private KeyboardState _prevkbstate;
@@ -19,9 +18,9 @@ namespace GaiaPulse.AnimationManager.EditorData
         private MouseState _mousestate;
         private MouseState _prevmousestate;
 
-        public Input(Vector2 windowSize)
+        public Input(EditorControl control)
         {
-            this._windowSize = windowSize;
+            _control = control;
             _keyboardstate = _prevkbstate = Keyboard.GetState();
             _mousestate = _prevmousestate = Mouse.GetState();
         }
@@ -130,6 +129,30 @@ namespace GaiaPulse.AnimationManager.EditorData
             }
 
             return false;
+        }
+
+        public Vector2 GetRealMousePosition()
+        {
+            var point = _control.PointToClient(new System.Drawing.Point((int)_mousestate.X, (int)_mousestate.Y));
+            
+            return new Vector2(point.X, point.Y);
+        }
+
+        public Vector2 GetScaledMousePosition(Matrix transformation)
+        {
+            return Vector2.Transform(GetRealMousePosition(), transformation);
+        }
+
+        public bool DetectMouseOver(Rectangle rect, Matrix view, Matrix sizematrix)
+        {
+            Vector2 position = Vector2.Transform(new Vector2(rect.X, rect.Y), view);
+            Vector2 size = Vector2.Transform(new Vector2(rect.Width, rect.Height), sizematrix);
+            Vector2 mousepos = GetRealMousePosition();
+            
+            Rectangle newrect = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
+            Rectangle mouserect = new Rectangle((int)mousepos.X, (int)mousepos.Y, 1,1);
+            
+            return newrect.Intersects(mouserect);
         }
     }
 }
