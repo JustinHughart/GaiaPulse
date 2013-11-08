@@ -59,14 +59,13 @@ namespace GaiaPulse.AnimationManager
             _content = new ContentManager(Services, "CommonData");
             _spritebatch = new SpriteBatch(GraphicsDevice);
             _font = _content.Load<SpriteFont>("Fonts/Courier New");
-            _camera = new Camera();
+            _camera = new Camera(new Vector2(Width, Height));
             
             _pointTexture = _content.Load<Texture2D>("pixelmarker");
             _lineTexture = _content.Load<Texture2D>("1x1");
 
             _primitives = new Primitives(_spritebatch, _lineTexture, _lineTexture);
-            _input = new Input(new Vector2(_winForm.Width, _winForm.Height));
-            _camera.SetRoomSize(new Vector2(_winForm.Width, _winForm.Height));
+            _input = new Input(this);
 
             TextureManager.Initialize(GraphicsDevice);
 
