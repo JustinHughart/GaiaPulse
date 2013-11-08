@@ -31,6 +31,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msSave = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,7 +45,6 @@
             this.cycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Editor = new GaiaPulse.AnimationManager.EditorControl();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,28 +77,35 @@
             // msNew
             // 
             this.msNew.Name = "msNew";
-            this.msNew.Size = new System.Drawing.Size(152, 22);
+            this.msNew.Size = new System.Drawing.Size(123, 22);
             this.msNew.Text = "New";
             this.msNew.Click += new System.EventHandler(this.NewToolStripMenuItemClick);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.openToolStripMenuItem.Text = "Open...";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
             // 
             // msSave
             // 
             this.msSave.Name = "msSave";
-            this.msSave.Size = new System.Drawing.Size(152, 22);
+            this.msSave.Size = new System.Drawing.Size(123, 22);
             this.msSave.Text = "Save";
             this.msSave.Click += new System.EventHandler(this.SaveToolStripMenuItem1Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItemClick);
             // 
             // msExit
             // 
             this.msExit.Name = "msExit";
-            this.msExit.Size = new System.Drawing.Size(152, 22);
+            this.msExit.Size = new System.Drawing.Size(123, 22);
             this.msExit.Text = "Exit";
             this.msExit.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
@@ -170,21 +177,16 @@
             // 
             // Editor
             // 
-            this.Editor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.Editor.Location = new System.Drawing.Point(0, 28);
+            this.Editor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Editor.Location = new System.Drawing.Point(0, 24);
+            this.Editor.Margin = new System.Windows.Forms.Padding(3, 23, 3, 3);
             this.Editor.Name = "Editor";
-            this.Editor.Size = new System.Drawing.Size(535, 325);
+            this.Editor.Padding = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.Editor.Size = new System.Drawing.Size(535, 329);
             this.Editor.TabIndex = 1;
             this.Editor.Text = "editor";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openToolStripMenuItem.Text = "Open...";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
             // 
             // AnimationEditor
             // 
