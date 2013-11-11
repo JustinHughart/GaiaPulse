@@ -1063,7 +1063,6 @@ namespace GaiaPulse.AnimationManager
             State = newstate;
 
             //Update the toolstrip.
-            int item = (int) newstate;
             var toolstrip= (ToolStrip)_winForm.Controls.Find("toolStrip", false)[0];
             var modeitem = (ToolStripMenuItem)toolstrip.Items[5];
             var itemlist = modeitem.DropDownItems;
