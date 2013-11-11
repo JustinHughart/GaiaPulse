@@ -124,6 +124,7 @@
     <Compile Include="AnimationManager\CycleManager.Designer.cs">
       <DependentUpon>CycleManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="AnimationManager\EditorData\MouseInputBase.cs" />
     <Compile Include="AnimationManager\NodeDataFrame.cs">
       <SubType>Form</SubType>
     </Compile>
