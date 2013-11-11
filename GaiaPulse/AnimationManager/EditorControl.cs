@@ -637,6 +637,7 @@ namespace GaiaPulse.AnimationManager
 
         private void CameraLogic()
         {
+            _camera.CheckMouseInput(_input);
             _camera.CheckKeys(_input);
         }
 

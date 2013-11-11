@@ -9,10 +9,11 @@ namespace GaiaPulse.AnimationManager.EditorData
         public Vector2 Position;
         public float Zoom;
         public Vector2 ControlSize;
+        public bool IsDragging;
 
         public Camera(Vector2 controlSize)
         {
-            Zoom = 1f;
+            Zoom = 2f;
             ControlSize = controlSize;
             Position = controlSize / 2;
         }
@@ -72,6 +73,30 @@ namespace GaiaPulse.AnimationManager.EditorData
             if (input.IsKBKeyDown(Keys.Add))
             {
                 Zoom = Math.Min(3f, Zoom + 0.02f);
+            }
+        }
+
+        public void CheckMouseInput(Input input)
+        {
+            if (IsDragging)
+            {
+                if (input.IsMouseKeyReleased(MouseKey.Left))
+                {
+                    IsDragging = false;
+                }
+                else
+                {
+                    Vector2 diff = -input.GetMouseVector();
+
+                    Position += diff;
+                }
+            }
+            else
+            {
+                if (input.IsMouseKeyPressed(MouseKey.Left))
+                {
+                    IsDragging = true;
+                }
             }
         }
     }
