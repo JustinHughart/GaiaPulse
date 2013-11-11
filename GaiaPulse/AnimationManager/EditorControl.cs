@@ -328,8 +328,8 @@ namespace GaiaPulse.AnimationManager
             DrawData frame = CurrFrame();
 
             Rectangle drawarea = frame.DrawArea;
-            drawarea.X = -(int)frame.Offsets.X;
-            drawarea.Y = -(int)frame.Offsets.Y;
+            drawarea.X = -(int)frame.Offsets.X - (int)frame.Origin.X;
+            drawarea.Y = -(int)frame.Offsets.Y - (int)frame.Origin.Y;
 
             if (!_facingright)
             {
