@@ -138,9 +138,9 @@ namespace GaiaPulse.AnimationManager.EditorData
             return new Vector2(point.X, point.Y);
         }
 
-        public Vector2 GetScaledMousePosition(Matrix transformation)
+        public Vector2 GetMouseVector()
         {
-            return Vector2.Transform(GetRealMousePosition(), transformation);
+            return new Vector2(_prevmousestate.X - _mousestate.X, _prevmousestate.Y - _mousestate.Y);
         }
 
         public bool DetectMouseOver(Rectangle rect, Matrix view, Matrix sizematrix)
