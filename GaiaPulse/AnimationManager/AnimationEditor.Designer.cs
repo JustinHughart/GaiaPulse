@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStrip = new System.Windows.Forms.MenuStrip();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msNew = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,23 +44,31 @@
             this.deleteFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolMode = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolCamera = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolDrawArea = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolOrigin = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolOffsets = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolHitboxes = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.Editor = new GaiaPulse.AnimationManager.EditorControl();
-            this.menuStrip1.SuspendLayout();
+            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // toolStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
             this.editToolStripMenuItem,
             this.framesToolStripMenuItem,
             this.cycleToolStripMenuItem,
-            this.texturesToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(535, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.texturesToolStripMenuItem,
+            this.toolMode});
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Size = new System.Drawing.Size(535, 24);
+            this.toolStrip.TabIndex = 0;
+            this.toolStrip.Text = "toolStrip";
             // 
             // saveToolStripMenuItem
             // 
@@ -175,11 +183,66 @@
             this.texturesToolStripMenuItem.Text = "Textures";
             this.texturesToolStripMenuItem.Click += new System.EventHandler(this.TexturesToolStripMenuItemClick);
             // 
+            // toolMode
+            // 
+            this.toolMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolCamera,
+            this.toolDrawArea,
+            this.toolOrigin,
+            this.toolOffsets,
+            this.toolHitboxes,
+            this.toolPreview});
+            this.toolMode.Name = "toolMode";
+            this.toolMode.Size = new System.Drawing.Size(50, 20);
+            this.toolMode.Text = "Mode";
+            // 
+            // toolCamera
+            // 
+            this.toolCamera.Name = "toolCamera";
+            this.toolCamera.Size = new System.Drawing.Size(152, 22);
+            this.toolCamera.Text = "Camera";
+            this.toolCamera.Click += new System.EventHandler(this.ToolCameraClick);
+            // 
+            // toolDrawArea
+            // 
+            this.toolDrawArea.Name = "toolDrawArea";
+            this.toolDrawArea.Size = new System.Drawing.Size(152, 22);
+            this.toolDrawArea.Text = "Draw Area";
+            this.toolDrawArea.Click += new System.EventHandler(this.ToolDrawAreaClick);
+            // 
+            // toolOrigin
+            // 
+            this.toolOrigin.Name = "toolOrigin";
+            this.toolOrigin.Size = new System.Drawing.Size(152, 22);
+            this.toolOrigin.Text = "Origin";
+            this.toolOrigin.Click += new System.EventHandler(this.ToolOriginClick);
+            // 
+            // toolOffsets
+            // 
+            this.toolOffsets.Name = "toolOffsets";
+            this.toolOffsets.Size = new System.Drawing.Size(152, 22);
+            this.toolOffsets.Text = "Offsets";
+            this.toolOffsets.Click += new System.EventHandler(this.ToolOffsetsClick);
+            // 
+            // toolHitboxes
+            // 
+            this.toolHitboxes.Name = "toolHitboxes";
+            this.toolHitboxes.Size = new System.Drawing.Size(152, 22);
+            this.toolHitboxes.Text = "Hitboxes";
+            this.toolHitboxes.Click += new System.EventHandler(this.ToolHitboxesClick);
+            // 
+            // toolPreview
+            // 
+            this.toolPreview.Name = "toolPreview";
+            this.toolPreview.Size = new System.Drawing.Size(152, 22);
+            this.toolPreview.Text = "Preview";
+            this.toolPreview.Click += new System.EventHandler(this.ToolPreviewClick);
+            // 
             // Editor
             // 
-            this.Editor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Editor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.Editor.Location = new System.Drawing.Point(0, 24);
             this.Editor.Margin = new System.Windows.Forms.Padding(3, 23, 3, 3);
             this.Editor.Name = "Editor";
@@ -194,13 +257,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(535, 353);
             this.Controls.Add(this.Editor);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.toolStrip);
+            this.MainMenuStrip = this.toolStrip;
             this.Name = "AnimationEditor";
             this.Text = "Gaia Pulse Animation Editor ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,7 +271,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip toolStrip;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem msSave;
@@ -225,5 +288,12 @@
         private EditorControl Editor;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolMode;
+        private System.Windows.Forms.ToolStripMenuItem toolCamera;
+        private System.Windows.Forms.ToolStripMenuItem toolDrawArea;
+        private System.Windows.Forms.ToolStripMenuItem toolOrigin;
+        private System.Windows.Forms.ToolStripMenuItem toolOffsets;
+        private System.Windows.Forms.ToolStripMenuItem toolHitboxes;
+        private System.Windows.Forms.ToolStripMenuItem toolPreview;
     }
 }

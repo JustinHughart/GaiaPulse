@@ -156,5 +156,35 @@ namespace GaiaPulse.AnimationManager
         {
             Text = "Gaia Pulse Animation Editor - " + SavePath + " -";
         }
+
+        private void ToolCameraClick(object sender, EventArgs e)
+        {
+            Editor.ChangeMode(EditorModeState.Camera);
+        }
+
+        private void ToolDrawAreaClick(object sender, EventArgs e)
+        {
+            Editor.ChangeMode(EditorModeState.SetDrawArea);
+        }
+
+        private void ToolOriginClick(object sender, EventArgs e)
+        {
+            Editor.ChangeMode(EditorModeState.SetOrigin);
+        }
+
+        private void ToolOffsetsClick(object sender, EventArgs e)
+        {
+            Editor.ChangeMode(EditorModeState.SetOffsets);
+        }
+
+        private void ToolHitboxesClick(object sender, EventArgs e)
+        {
+            Editor.ChangeMode(EditorModeState.SetHitboxes);
+        }
+
+        private void ToolPreviewClick(object sender, EventArgs e)
+        {
+            Editor.ChangeMode(EditorModeState.Overview);
+        }
     }
 }

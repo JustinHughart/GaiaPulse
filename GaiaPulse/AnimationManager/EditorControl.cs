@@ -79,6 +79,8 @@ namespace GaiaPulse.AnimationManager
             {
                 LoadAnim();   
             }
+
+            ChangeMode(EditorModeState.Camera);
             
             Application.Idle += delegate { Invalidate(); };
         }
@@ -642,32 +644,32 @@ namespace GaiaPulse.AnimationManager
         {
             if (_input.IsKBKeyPressed(Keys.D1))
             {
-                State = EditorModeState.Camera;
+                ChangeMode(EditorModeState.Camera);
             }
 
             if (_input.IsKBKeyPressed(Keys.D2))
             {
-                State = EditorModeState.SetDrawArea;
+                ChangeMode(EditorModeState.SetDrawArea);
             }
 
             if (_input.IsKBKeyPressed(Keys.D3))
             {
-                State = EditorModeState.SetOrigin;
+                ChangeMode(EditorModeState.SetOrigin);
             }
 
             if (_input.IsKBKeyPressed(Keys.D4))
             {
-                State = EditorModeState.SetOffsets;
+                ChangeMode(EditorModeState.SetOffsets);
             }
 
             if (_input.IsKBKeyPressed(Keys.D5))
             {
-                State = EditorModeState.SetHitboxes;
+                ChangeMode(EditorModeState.SetHitboxes);
             }
 
             if (_input.IsKBKeyPressed(Keys.D6))
             {
-                State = EditorModeState.Overview;
+                ChangeMode(EditorModeState.Overview);
             }
 
             if (_input.IsKBKeyPressed(Keys.Tab))
@@ -1053,6 +1055,27 @@ namespace GaiaPulse.AnimationManager
             Initialize();
             //Anim = new FrameAnimation("bah", false);
             //Frames = new List<DrawData>();
+        }
+
+        public void ChangeMode(EditorModeState newstate)
+        {
+            //Change state.
+            State = newstate;
+
+            //Update the toolstrip.
+            int item = (int) newstate;
+            var toolstrip= (ToolStrip)_winForm.Controls.Find("toolStrip", false)[0];
+            var modeitem = (ToolStripMenuItem)toolstrip.Items[5];
+            var itemlist = modeitem.DropDownItems;
+
+            itemlist[0].Text = "Camera";
+            itemlist[1].Text = "Draw Area";
+            itemlist[2].Text = "Origin";
+            itemlist[3].Text = "Offsets";
+            itemlist[4].Text = "Hitboxes";
+            itemlist[5].Text = "Preview";
+
+            itemlist[(int)newstate].Text = "[X] " + itemlist[(int)newstate].Text;
         }
     }
 }
