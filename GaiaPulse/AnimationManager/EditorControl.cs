@@ -16,7 +16,7 @@ namespace GaiaPulse.AnimationManager
 {
     public enum EditorModeState
     {
-        Camera, SetDrawArea, SetOrigin, SetOffsets, SetHitboxes, Overview,
+        Camera, DrawArea, Origin, Offsets, Hitboxes, Preview,
     }
 
     public class EditorControl : GraphicsDeviceControl
@@ -108,19 +108,19 @@ namespace GaiaPulse.AnimationManager
             {
                 case EditorModeState.Camera:
                     break;
-                case EditorModeState.SetDrawArea:
+                case EditorModeState.DrawArea:
                     DrawDrawArea();
                     break;
-                case EditorModeState.SetOrigin:
+                case EditorModeState.Origin:
                     DrawOrigin();
                     break;
-                case EditorModeState.SetOffsets:
+                case EditorModeState.Offsets:
                     DrawOffsets();
                     break;
-                case EditorModeState.SetHitboxes:
+                case EditorModeState.Hitboxes:
                     DrawHitboxes();
                     break;
-                case EditorModeState.Overview:
+                case EditorModeState.Preview:
                     DrawOverview();
                     break;
             }
@@ -168,7 +168,7 @@ namespace GaiaPulse.AnimationManager
                     }
 
                     break;
-                case EditorModeState.SetDrawArea:
+                case EditorModeState.DrawArea:
                     _spritebatch.DrawString(_font, "Draw Area: " + CurrFrame().DrawArea, new Vector2(0, numlines * 32), Color.White);
 
                     numlines++;
@@ -202,7 +202,7 @@ namespace GaiaPulse.AnimationManager
                     }
 
                     break;
-                case EditorModeState.SetOrigin:
+                case EditorModeState.Origin:
                     _spritebatch.DrawString(_font, "Origin: " + CurrFrame().Origin, new Vector2(0, numlines * 32), Color.White);
 
                     numlines++;
@@ -224,7 +224,7 @@ namespace GaiaPulse.AnimationManager
                     }
 
                     break;
-                case EditorModeState.SetOffsets:
+                case EditorModeState.Offsets:
                     _spritebatch.DrawString(_font, "Offsets: " + CurrFrame().Offsets, new Vector2(0, numlines * 32), Color.White);
 
                     numlines++;
@@ -246,7 +246,7 @@ namespace GaiaPulse.AnimationManager
                     }
 
                     break;
-                case EditorModeState.SetHitboxes:
+                case EditorModeState.Hitboxes:
                     BoundBox box = CurrHitbox();
 
                     String boxdata = "";
@@ -408,16 +408,16 @@ namespace GaiaPulse.AnimationManager
                     case EditorModeState.Camera:
                         CameraLogic();
                         break;
-                    case EditorModeState.SetDrawArea:
+                    case EditorModeState.DrawArea:
                         CheckDrawAreaKeys();
                         break;
-                    case EditorModeState.SetOrigin:
+                    case EditorModeState.Origin:
                         CheckOriginKeys();
                         break;
-                    case EditorModeState.SetOffsets:
+                    case EditorModeState.Offsets:
                         CheckOffsetKeys();
                         break;
-                    case EditorModeState.SetHitboxes:
+                    case EditorModeState.Hitboxes:
                         CheckHitboxKeys();
                         break;
                 }
@@ -649,27 +649,27 @@ namespace GaiaPulse.AnimationManager
 
             if (_input.IsKBKeyPressed(Keys.D2))
             {
-                ChangeMode(EditorModeState.SetDrawArea);
+                ChangeMode(EditorModeState.DrawArea);
             }
 
             if (_input.IsKBKeyPressed(Keys.D3))
             {
-                ChangeMode(EditorModeState.SetOrigin);
+                ChangeMode(EditorModeState.Origin);
             }
 
             if (_input.IsKBKeyPressed(Keys.D4))
             {
-                ChangeMode(EditorModeState.SetOffsets);
+                ChangeMode(EditorModeState.Offsets);
             }
 
             if (_input.IsKBKeyPressed(Keys.D5))
             {
-                ChangeMode(EditorModeState.SetHitboxes);
+                ChangeMode(EditorModeState.Hitboxes);
             }
 
             if (_input.IsKBKeyPressed(Keys.D6))
             {
-                ChangeMode(EditorModeState.Overview);
+                ChangeMode(EditorModeState.Preview);
             }
 
             if (_input.IsKBKeyPressed(Keys.Tab))

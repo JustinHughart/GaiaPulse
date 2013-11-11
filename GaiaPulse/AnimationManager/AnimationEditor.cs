@@ -164,27 +164,27 @@ namespace GaiaPulse.AnimationManager
 
         private void ToolDrawAreaClick(object sender, EventArgs e)
         {
-            Editor.ChangeMode(EditorModeState.SetDrawArea);
+            Editor.ChangeMode(EditorModeState.DrawArea);
         }
 
         private void ToolOriginClick(object sender, EventArgs e)
         {
-            Editor.ChangeMode(EditorModeState.SetOrigin);
+            Editor.ChangeMode(EditorModeState.Origin);
         }
 
         private void ToolOffsetsClick(object sender, EventArgs e)
         {
-            Editor.ChangeMode(EditorModeState.SetOffsets);
+            Editor.ChangeMode(EditorModeState.Offsets);
         }
 
         private void ToolHitboxesClick(object sender, EventArgs e)
         {
-            Editor.ChangeMode(EditorModeState.SetHitboxes);
+            Editor.ChangeMode(EditorModeState.Hitboxes);
         }
 
         private void ToolPreviewClick(object sender, EventArgs e)
         {
-            Editor.ChangeMode(EditorModeState.Overview);
+            Editor.ChangeMode(EditorModeState.Preview);
         }
     }
 }
